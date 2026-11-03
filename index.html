@@ -116,7 +116,18 @@ th{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute
 .form input,.form select,.form textarea{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff}
 .form textarea{min-height:90px;resize:vertical}
 .sum{background:#f4efe6;border-radius:12px;padding:18px;margin-top:18px;font-size:15px}
-.sum b{float:right}
+.sum .row{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px solid #e7ddc9}
+.sum .row:last-child{border-bottom:0}
+.sum .row.total{font-size:18px}
+.avail-card{display:grid;grid-template-columns:110px 1fr;gap:16px;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:14px}
+.avail-card .ph{height:100%;min-height:110px}
+.avail-card .bd{padding:16px 16px 16px 0}
+.avail-card h3{font-size:26px}
+.avail-card .meta{font-size:13px;color:var(--muted)}
+.avail-card .price{font-family:"Cormorant Garamond",serif;font-size:26px;font-weight:600;margin-top:6px}
+.avail-stats{display:flex;gap:18px;margin-top:8px;font-size:13px;color:var(--muted)}
+.avail-stats b{color:var(--ink);font-size:15px}
+.sec-head{border-bottom:1px solid var(--line);padding-bottom:22px}
 .note{font-size:13px;color:var(--muted);margin-top:12px}
 .policy{background:#f4efe6;border-radius:16px;padding:26px}
 .policy h3{font-size:26px;margin-bottom:10px}
@@ -295,11 +306,11 @@ th{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute
     <div class="sec-head"><p class="eyebrow">Disponibilidade</p><h2>Quartos livres nas tuas datas.</h2><p>Escolhe a entrada e a saída. A disponibilidade muda todos os dias, à medida que as reservas entram — só aparecem os quartos ainda livres.</p></div>
     <div class="form" style="max-width:720px">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-        <div><label>Entrada</label><input type="date" id="av-in"></div>
-        <div><label>Saída</label><input type="date" id="av-out"></div>
+        <div><label>Entrada</label><input type="text" id="av-in" inputmode="numeric" placeholder="DD/MM/AAAA" maxlength="10"></div>
+        <div><label>Saída</label><input type="text" id="av-out" inputmode="numeric" placeholder="DD/MM/AAAA" maxlength="10"></div>
       </div>
       <button class="btn" style="margin-top:18px" onclick="checkAvailability()">Ver disponibilidade</button>
-      <p class="note">Podes reservar até um ano antes da data. Estadias longas, de um mês ou mais, são bem-vindas.</p>
+      <p class="note">Escreve a data como dia/mês/ano. Podes reservar até um ano antes da data. Estadias longas, de um mês ou mais, são bem-vindas.</p>
     </div>
     <div id="avail-results" style="margin-top:30px"></div>
   </div>
@@ -402,8 +413,11 @@ const me = () => { const e = session(); return e ? ACCOUNTS.find(a => a.email ==
 const roomById = id => ROOMS.find(r => r.id === id);
 const fmt = n => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " MT";
 const esc = s => String(s == null ? "" : s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
-const todayISO = () => { const d = new Date(); return d.toISOString().slice(0,10); };
-const addDaysISO = (iso, n) => { const d = new Date(iso + "T00:00:00"); d.setDate(d.getDate() + n); return d.toISOString().slice(0,10); };
+const pad2 = n => String(n).padStart(2, "0");
+const todayISO = () => { const d = new Date(); return d.getFullYear() + "-" + pad2(d.getMonth() + 1) + "-" + pad2(d.getDate()); };
+const addDaysISO = (iso, n) => { const d = new Date(iso + "T00:00:00"); d.setDate(d.getDate() + n); return d.getFullYear() + "-" + pad2(d.getMonth() + 1) + "-" + pad2(d.getDate()); };
+const fmtDate = iso => iso ? iso.split("-").reverse().join("/") : "";
+const parseDate = s => { const m = String(s || "").trim().match(/^(\d{1,2})[\/\-.](\d{1,2})[\/\-.](\d{4})$/); if(!m) return null; const d = +m[1], mo = +m[2] - 1, y = +m[3]; const dt = new Date(y, mo, d); if(dt.getFullYear() !== y || dt.getMonth() !== mo || dt.getDate() !== d) return null; return y + "-" + pad2(mo + 1) + "-" + pad2(d); };
 const nightsBetween = (a, b) => Math.round((new Date(b + "T00:00:00") - new Date(a + "T00:00:00")) / 86400000);
 const overlaps = (a1, a2, b1, b2) => a1 < b2 && b1 < a2;
 function freeUnits(roomId, din, dout){
@@ -449,7 +463,7 @@ function renderHomeRooms(){
     '<div class="ph"><img src="' + r.photos[0] + '" alt="' + esc(r.name) + '"></div>' +
     '<div class="bd"><h3>' + esc(r.name) + '</h3>' +
     '<div class="meta">' + esc(r.beds) + ' · até ' + r.guests + ' hóspedes · ' + r.size + ' m² · ' + r.units + ' unidades</div>' +
-    '<div class="actions"><button class="btn small" onclick="event.stopPropagation();go(\'quarto/' + r.id + '\')">Ver detalhes</button></div></div></div>'
+    '<div style="margin-top:12px;color:var(--sea);font-weight:700;font-size:14px">Ver detalhes →</div></div></div>'
   ).join("");
 }
 function renderRoomsPage(){
@@ -477,7 +491,7 @@ function renderRoomDetail(id){
     '<div class="gal-thumbs">' + thumbs + '</div>' +
     '<p class="note">Toca numa foto para ver cada ambiente do quarto em detalhe: quarto, varanda, sala e casa de banho.</p>' +
     '<div class="form" style="margin-top:20px"><label>Ver disponibilidade nestas datas</label>' +
-    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><input type="date" id="det-in"><input type="date" id="det-out"></div>' +
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><input type="text" id="det-in" inputmode="numeric" placeholder="DD/MM/AAAA" maxlength="10"><input type="text" id="det-out" inputmode="numeric" placeholder="DD/MM/AAAA" maxlength="10"></div>' +
     '<button class="btn small" style="margin-top:12px" onclick="checkDetailAvail(\'' + r.id + '\')">Ver disponibilidade</button>' +
     '<div id="det-avail" style="margin-top:12px"></div></div>' +
     '</div><div>' +
@@ -487,13 +501,13 @@ function renderRoomDetail(id){
     '<div class="meta" style="margin-top:6px;color:var(--muted);font-size:14px">' + esc(r.beds) + ' · até ' + r.guests + ' hóspedes · ' + r.size + ' m² · ' + r.units + ' unidades no hotel</div>' +
     '<div class="amen">' + r.amenities.map(a => "<span>" + esc(a) + "</span>").join("") + "</div>" +
     '<p style="font-size:14px">Entrada ' + esc(SETTINGS.checkin) + ' · Saída ' + esc(SETTINGS.checkout) + ' · Estadia mínima 1 noite, sem limite máximo dentro de um ano.</p>' +
-    '<div class="sum">Entrada para reservar (metade)<b>' + fmt(r.price * SETTINGS.depositPct / 100) + ' / noite</b><br><span style="font-size:13px;color:var(--muted)">A entrada conta para o pagamento final, pago no hotel.</span></div>' +
+    '<div class="sum"><div class="row"><span>Entrada para reservar (metade)</span><b>' + fmt(r.price * SETTINGS.depositPct / 100) + ' / noite</b></div><span style="font-size:13px;color:var(--muted)">A entrada conta para o pagamento final, pago no hotel.</span></div>' +
     '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px"><button class="btn" onclick="go(\'reservar/' + r.id + '\')">Reservar este quarto</button>' +
     '<button class="btn ghost" style="color:var(--dark);border-color:var(--dark)" onclick="go(\'disponibilidade\')">Ver disponibilidade</button></div>' +
     '</div></div>';
   const di = document.getElementById("det-in"), dout = document.getElementById("det-out");
-  di.min = todayISO(); di.max = addDaysISO(todayISO(), 365); di.value = todayISO();
-  dout.min = addDaysISO(todayISO(), 1); dout.max = addDaysISO(todayISO(), 730); dout.value = addDaysISO(todayISO(), 2);
+  di.value = fmtDate(todayISO());
+  dout.value = fmtDate(addDaysISO(todayISO(), 2));
 }
 function setGal(i, el){
   galIdx = i;
@@ -502,9 +516,9 @@ function setGal(i, el){
   el.classList.add("sel");
 }
 function checkDetailAvail(roomId){
-  const din = document.getElementById("det-in").value, dout = document.getElementById("det-out").value;
+  const din = parseDate(document.getElementById("det-in").value), dout = parseDate(document.getElementById("det-out").value);
   const box = document.getElementById("det-avail");
-  if(!din || !dout || nightsBetween(din, dout) < 1){ box.innerHTML = "<p style='color:#9a4a1f'>Escolhe uma entrada e uma saída válida (a saída depois da entrada).</p>"; return; }
+  if(!din || !dout || nightsBetween(din, dout) < 1){ box.innerHTML = "<p style='color:#9a4a1f'>Escreve as datas como dia/mês/ano, com a saída depois da entrada.</p>"; return; }
   const free = freeUnits(roomId, din, dout);
   box.innerHTML = free > 0
     ? "<p><span class='tag ok'>" + free + " livres</span> nestas datas. <button class='btn small' style='margin-left:8px' onclick=\"go('reservar/" + roomId + "')\">Reservar</button></p>"
@@ -513,23 +527,26 @@ function checkDetailAvail(roomId){
 function initAvailDates(){
   const a = document.getElementById("av-in"), b = document.getElementById("av-out");
   if(!a) return;
-  a.min = todayISO(); a.max = addDaysISO(todayISO(), 365); if(!a.value) a.value = todayISO();
-  b.min = addDaysISO(todayISO(), 1); b.max = addDaysISO(todayISO(), 730); if(!b.value) b.value = addDaysISO(todayISO(), 2);
+  if(!a.value) a.value = fmtDate(todayISO());
+  if(!b.value) b.value = fmtDate(addDaysISO(todayISO(), 2));
 }
 function checkAvailability(){
-  const din = document.getElementById("av-in").value, dout = document.getElementById("av-out").value;
+  const din = parseDate(document.getElementById("av-in").value), dout = parseDate(document.getElementById("av-out").value);
   const box = document.getElementById("avail-results");
-  if(!din || !dout || nightsBetween(din, dout) < 1){ box.innerHTML = "<p style='color:#9a4a1f'>Escolhe uma entrada e uma saída válida.</p>"; return; }
+  if(!din || !dout || nightsBetween(din, dout) < 1){ box.innerHTML = "<p style='color:#9a4a1f'>Escreve as datas como dia/mês/ano, com a saída depois da entrada.</p>"; return; }
   const n = nightsBetween(din, dout);
-  let rows = ROOMS.map(r => {
+  let cards = ROOMS.map(r => {
     const free = freeUnits(r.id, din, dout);
-    return "<tr><td><b>" + esc(r.name) + "</b><br><span style='color:var(--muted)'>" + esc(r.beds) + " · até " + r.guests + " hóspedes</span></td>" +
-    "<td>" + fmt(r.price) + " / noite</td><td>" + r.units + "</td><td>" + free + "</td>" +
-    "<td>" + (free > 0 ? "<span class='tag ok'>Disponível</span>" : "<span class='tag warn'>Esgotado</span>") + "</td>" +
-    "<td>" + (free > 0 ? "<button class='btn small' onclick=\"go('reservar/" + r.id + "')\">Reservar</button>" : "—") + "</td></tr>";
+    return "<div class='avail-card'><div class='ph'><img src='" + r.photos[0] + "' alt='" + esc(r.name) + "'></div>" +
+    "<div class='bd'><h3>" + esc(r.name) + "</h3>" +
+    "<div class='meta'>" + esc(r.beds) + " · até " + r.guests + " hóspedes · " + r.size + " m²</div>" +
+    "<div class='price'>" + fmt(r.price) + " <small style='font-size:14px;color:var(--muted)'>/ noite</small></div>" +
+    "<div class='avail-stats'><span><b>" + r.units + "</b> unidades</span><span><b>" + free + "</b> livres</span></div>" +
+    "<div style='display:flex;gap:10px;align-items:center;margin-top:12px;flex-wrap:wrap'>" +
+    (free > 0 ? "<span class='tag ok'>Disponível</span><button class='btn small' onclick=\"go('reservar/" + r.id + "')\">Reservar</button>" : "<span class='tag warn'>Esgotado nestas datas</span>") +
+    "<button class='btn small ghost' style='color:var(--dark);border-color:var(--dark)' onclick=\"go('quarto/" + r.id + "')\">Ver detalhes</button></div></div></div>";
   }).join("");
-  box.innerHTML = "<p style='margin-bottom:12px'><b>" + n + " noite" + (n > 1 ? "s" : "") + "</b> · " + din.split("-").reverse().join("/") + " → " + dout.split("-").reverse().join("/") + " · a disponibilidade actualiza-se com cada reserva.</p>" +
-    "<div style='overflow:auto'><table><tr><th>Quarto</th><th>Preço</th><th>Unidades</th><th>Livres</th><th>Estado</th><th></th></tr>" + rows + "</table></div>";
+  box.innerHTML = "<p style='margin-bottom:18px'><b>" + n + " noite" + (n > 1 ? "s" : "") + "</b> · " + fmtDate(din) + " → " + fmtDate(dout) + " · a disponibilidade actualiza-se com cada reserva.</p>" + cards;
 }
 </script>
 
@@ -537,7 +554,7 @@ function checkAvailability(){
 function bookingHTML(b){
   const r = roomById(b.roomId);
   return "<div class='admin-card'><b>" + esc(b.id) + "</b> · " + esc(r ? r.name : b.roomId) +
-  "<br><span style='color:var(--muted);font-size:14px'>" + b.in.split("-").reverse().join("/") + " → " + b.out.split("-").reverse().join("/") + " · " + b.nights + " noite" + (b.nights > 1 ? "s" : "") + " · " + b.guests + " hóspede" + (b.guests > 1 ? "s" : "") + "</span>" +
+  "<br><span style='color:var(--muted);font-size:14px'>" + fmtDate(b.in) + " → " + fmtDate(b.out) + " · " + b.nights + " noite" + (b.nights > 1 ? "s" : "") + " · " + b.guests + " hóspede" + (b.guests > 1 ? "s" : "") + "</span>" +
   "<br>Total: <b>" + fmt(b.total) + "</b> · Entrada: <b>" + fmt(b.deposit) + "</b> · Restante no hotel: <b>" + fmt(b.rest) + "</b>" +
   "<br><span class='tag " + (b.status === "Cancelada" ? "warn" : "ok") + "'>" + esc(b.status) + "</span> " +
   "<span class='tag " + (b.payStatus === "Pago" ? "ok" : "warn") + "'>" + esc(b.payStatus) + "</span>" +
@@ -572,8 +589,9 @@ function renderBooking(prefRoom){
   const roomsOpts = ROOMS.map(r => "<option value='" + r.id + "'" + (r.id === prefRoom ? " selected" : "") + ">" + esc(r.name) + " — " + fmt(r.price) + " / noite</option>").join("");
   box.innerHTML = "<div class='form'>" +
     "<label>Quarto</label><select id='bk-room' onchange='syncGuests();updateBookingSum()'>" + roomsOpts + "</select>" +
-    "<div style='display:grid;grid-template-columns:1fr 1fr;gap:14px'><div><label>Entrada</label><input type='date' id='bk-in' onchange='updateBookingSum()'></div>" +
-    "<div><label>Saída</label><input type='date' id='bk-out' onchange='updateBookingSum()'></div></div>" +
+    "<div style='display:grid;grid-template-columns:1fr 1fr;gap:14px'><div><label>Entrada</label><input type='text' id='bk-in' inputmode='numeric' placeholder='DD/MM/AAAA' maxlength='10' onchange='updateBookingSum()'></div>" +
+    "<div><label>Saída</label><input type='text' id='bk-out' inputmode='numeric' placeholder='DD/MM/AAAA' maxlength='10' onchange='updateBookingSum()'></div></div>" +
+    "<p class='note'>Escreve a data como dia/mês/ano.</p>" +
     "<label>Hóspedes</label><select id='bk-guests' onchange='updateBookingSum()'></select>" +
     "<label>Nome</label><input id='bk-name' value='" + esc(me().name || "") + "'>" +
     "<label>Contacto / WhatsApp</label><input id='bk-phone' placeholder='Ex.: 84xxxxxxx'>" +
@@ -583,8 +601,8 @@ function renderBooking(prefRoom){
     "<button class='btn' style='margin-top:16px' onclick='submitBooking()'>Confirmar reserva</button>" +
     "<div id='bk-msg' style='margin-top:12px'></div></div>";
   const bi = document.getElementById("bk-in"), bo = document.getElementById("bk-out");
-  bi.min = todayISO(); bi.max = addDaysISO(todayISO(), 365); bi.value = todayISO();
-  bo.min = addDaysISO(todayISO(), 1); bo.max = addDaysISO(todayISO(), 730); bo.value = addDaysISO(todayISO(), 2);
+  bi.value = fmtDate(todayISO());
+  bo.value = fmtDate(addDaysISO(todayISO(), 2));
   syncGuests(); updateBookingSum();
 }
 function syncGuests(){
@@ -594,21 +612,21 @@ function syncGuests(){
 }
 function updateBookingSum(){
   const r = roomById(document.getElementById("bk-room").value);
-  const din = document.getElementById("bk-in").value, dout = document.getElementById("bk-out").value;
+  const din = parseDate(document.getElementById("bk-in").value), dout = parseDate(document.getElementById("bk-out").value);
   const sum = document.getElementById("bk-sum"); if(!r || !sum) return;
   const n = nightsBetween(din, dout);
-  if(!din || !dout || n < 1){ sum.innerHTML = "Escolhe uma entrada e uma saída válida (a saída depois da entrada)."; return; }
+  if(!din || !dout || n < 1){ sum.innerHTML = "Escreve as datas como dia/mês/ano, com a saída depois da entrada."; return; }
   const total = r.price * n, dep = Math.round(total * SETTINGS.depositPct / 100), rest = total - dep;
   const free = freeUnits(r.id, din, dout);
-  sum.innerHTML = n + " noite" + (n > 1 ? "s" : "") + " × " + fmt(r.price) + "<b>" + fmt(total) + "</b><br>" +
-    "Entrada (" + SETTINGS.depositPct + "%)<b>" + fmt(dep) + "</b><br>" +
-    "Restante no hotel<b>" + fmt(rest) + "</b><br>" +
+  sum.innerHTML = "<div class='row'><span>" + n + " noite" + (n > 1 ? "s" : "") + " × " + fmt(r.price) + "</span><b>" + fmt(total) + "</b></div>" +
+    "<div class='row'><span>Entrada (" + SETTINGS.depositPct + "%)</span><b>" + fmt(dep) + "</b></div>" +
+    "<div class='row'><span>Restante no hotel</span><b>" + fmt(rest) + "</b></div>" +
     "<span style='font-size:13px;color:" + (free > 0 ? "#2e6b34" : "#9a4a1f") + "'>" + (free > 0 ? free + " unidades livres nestas datas" : "Esgotado nestas datas — escolhe outras datas") + "</span>";
 }
 function submitBooking(){
   const u = me(); if(!u) return;
   const roomId = document.getElementById("bk-room").value, r = roomById(roomId);
-  const din = document.getElementById("bk-in").value, dout = document.getElementById("bk-out").value;
+  const din = parseDate(document.getElementById("bk-in").value), dout = parseDate(document.getElementById("bk-out").value);
   const guests = parseInt(document.getElementById("bk-guests").value, 10);
   const name = document.getElementById("bk-name").value.trim();
   const phone = document.getElementById("bk-phone").value.trim();
@@ -616,16 +634,17 @@ function submitBooking(){
   const msg = document.getElementById("bk-msg");
   const n = nightsBetween(din, dout);
   if(!name){ msg.innerHTML = "<p style='color:#9a4a1f'>Escreve o teu nome.</p>"; return; }
-  if(!din || !dout || n < 1){ msg.innerHTML = "<p style='color:#9a4a1f'>Escolhe datas válidas.</p>"; return; }
+  if(!din || !dout || n < 1){ msg.innerHTML = "<p style='color:#9a4a1f'>Escreve as datas como dia/mês/ano, com a saída depois da entrada.</p>"; return; }
   if(din < todayISO() || din > addDaysISO(todayISO(), 365)){ msg.innerHTML = "<p style='color:#9a4a1f'>A entrada tem de ser de hoje até um ano à frente.</p>"; return; }
+  if(n > 365){ msg.innerHTML = "<p style='color:#9a4a1f'>A estadia máxima é de um ano.</p>"; return; }
   if(guests > r.guests){ msg.innerHTML = "<p style='color:#9a4a1f'>Este quarto aceita no máximo " + r.guests + " hóspedes.</p>"; return; }
   if(freeUnits(roomId, din, dout) < 1){ msg.innerHTML = "<p style='color:#9a4a1f'>Este quarto está esgotado nestas datas.</p>"; return; }
   const total = r.price * n, dep = Math.round(total * SETTINGS.depositPct / 100);
   const b = {id: "AZUL-" + Date.now().toString(36).toUpperCase(), email: u.email, name: name, phone: phone, notes: notes, roomId: roomId, in: din, out: dout, guests: guests, nights: n, total: total, deposit: dep, rest: total - dep, status: "Pendente", payStatus: "Aguarda pagamento", createdAt: new Date().toISOString()};
   BOOKINGS.push(b); saveBookings();
   document.getElementById("booking-area").innerHTML = "<div class='form'><h3 style='font-size:28px'>Reserva registada.</h3>" +
-    "<p style='color:var(--muted);margin:10px 0'>Reserva <b style='color:var(--ink)'>" + b.id + "</b> · " + esc(r.name) + " · " + din.split("-").reverse().join("/") + " → " + dout.split("-").reverse().join("/") + " · " + n + " noite" + (n > 1 ? "s" : "") + "</p>" +
-    "<div class='sum'>Total<b>" + fmt(total) + "</b><br>Entrada a pagar<b>" + fmt(dep) + "</b><br>Restante no hotel<b>" + fmt(total - dep) + "</b></div>" +
+    "<p style='color:var(--muted);margin:10px 0'>Reserva <b style='color:var(--ink)'>" + b.id + "</b> · " + esc(r.name) + " · " + fmtDate(din) + " → " + fmtDate(dout) + " · " + n + " noite" + (n > 1 ? "s" : "") + "</p>" +
+    "<div class='sum'><div class='row'><span>Total</span><b>" + fmt(total) + "</b></div><div class='row'><span>Entrada a pagar</span><b>" + fmt(dep) + "</b></div><div class='row'><span>Restante no hotel</span><b>" + fmt(total - dep) + "</b></div></div>" +
     "<div style='display:flex;gap:10px;margin-top:18px;flex-wrap:wrap'><button class='btn' onclick=\"go('pagamento/" + b.id + "')\">Pagar entrada</button>" +
     "<button class='btn ghost' style='color:var(--dark);border-color:var(--dark)' onclick=\"go('conta')\">Ver as minhas reservas</button></div></div>";
   toast("Reserva " + b.id + " registada");
@@ -657,10 +676,9 @@ function renderPayment(id){
     return;
   }
   box.innerHTML = "<p class='eyebrow'>Pagamento</p><h2 style='font-size:36px;margin:10px 0'>Pagar a entrada.</h2>" +
-  "<div class='form'><p><b>" + esc(r ? r.name : b.roomId) + "</b> · " + b.in.split("-").reverse().join("/") + " → " + b.out.split("-").reverse().join("/") + " · " + b.nights + " noite" + (b.nights > 1 ? "s" : "") + "</p>" +
-  "<div class='sum'>Total da estadia<b>" + fmt(b.total) + "</b><br>Entrada a pagar agora<b>" + fmt(b.deposit) + "</b><br>Restante no hotel<b>" + fmt(b.rest) + "</b></div>" +
-  "<p style='margin-top:16px'><b>Formas de pagamento</b></p>" +
-  "<p style='color:var(--muted)'>" + esc(SETTINGS.paymentNote || "As formas de pagamento serão anunciadas aqui pela gerência.") + "</p>" +
+  "<div class='form'><p><b>" + esc(r ? r.name : b.roomId) + "</b> · " + fmtDate(b.in) + " → " + fmtDate(b.out) + " · " + b.nights + " noite" + (b.nights > 1 ? "s" : "") + "</p>" +
+  "<div class='sum'><div class='row'><span>Total da estadia</span><b>" + fmt(b.total) + "</b></div><div class='row'><span>Entrada a pagar agora</span><b>" + fmt(b.deposit) + "</b></div><div class='row'><span>Restante no hotel</span><b>" + fmt(b.rest) + "</b></div></div>" +
+  (SETTINGS.paymentNote ? "<p style='margin-top:16px'><b>Formas de pagamento</b></p><p style='color:var(--muted)'>" + esc(SETTINGS.paymentNote) + "</p>" : "<p style='margin-top:16px;color:var(--muted)'>A entrada é confirmada pelo hotel. Fala no chat para concluir a tua reserva.</p>") +
   "<p class='note'>Depois de pagares, o hotel confirma o pagamento e o recibo aparece aqui automaticamente. Sem confirmação, a reserva fica a aguardar pagamento.</p>" +
   "<div style='display:flex;gap:10px;margin-top:16px;flex-wrap:wrap'><button class='btn' onclick='openChatFab()'>Avisar o hotel no chat</button>" +
   "<button class='btn ghost' style='color:var(--dark);border-color:var(--dark)' onclick=\"go('conta')\">Ver as minhas reservas</button></div></div>";
@@ -680,8 +698,7 @@ function renderConta(){
     "<label>Nome</label><input id='su-name'>" +
     "<label>Email</label><input id='su-email' type='email'>" +
     "<label>Senha</label><input id='su-pass' type='password'>" +
-    "<button class='btn' style='margin-top:16px' onclick='signup()'>Criar conta</button>" +
-    "<p class='note'>A primeira conta criada é a conta de administração do hotel.</p></div>";
+    "<button class='btn' style='margin-top:16px' onclick='signup()'>Criar conta</button></div>";
     return;
   }
   const mine = BOOKINGS.filter(b => b.email === u.email).sort((a, b) => b.createdAt.localeCompare(a.createdAt));
@@ -691,7 +708,7 @@ function renderConta(){
   "<button class='btn ghost' style='color:var(--dark);border-color:var(--dark)' onclick='openChatFab()'>Abrir o chat</button>" +
   "<button class='btn ghost' style='color:var(--dark);border-color:var(--dark)' onclick='logout()'>Sair</button></div>" +
   "<h3 style='font-size:26px;margin:22px 0 12px'>As minhas reservas</h3>" +
-  (mine.length ? mine.map(bookingHTML).join("") : "<p style='color:var(--muted)'>Ainda não tens reservas. <a href='#' onclick=\"go('disponibilidade');return false\" style='color:var(--sea);font-weight:700'>Ver disponibilidade →</a></p>");
+  (mine.length ? mine.map(bookingHTML).join("") : "<p style='color:var(--muted)'>As tuas reservas aparecem aqui. <a href='#' onclick=\"go('disponibilidade');return false\" style='color:var(--sea);font-weight:700'>Ver disponibilidade →</a></p>");
 }
 async function login(){
   const email = document.getElementById("li-email").value.trim().toLowerCase();
@@ -728,7 +745,7 @@ function renderAdmin(tab){
   adminTab = tab || adminTab;
   const box = document.getElementById("admin-box");
   const u = me();
-  if(!u || !u.isAdmin){ box.innerHTML = "<h2 style='font-size:32px'>Administração</h2><p style='color:var(--muted);margin-top:10px'>Só a conta de administração entra aqui. A primeira conta criada no site é a de administração.</p><button class='btn' style='margin-top:16px' onclick=\"go('conta')\">Ir para a conta</button>"; return; }
+  if(!u || !u.isAdmin){ box.innerHTML = "<h2 style='font-size:32px'>Administração</h2><p style='color:var(--muted);margin-top:10px'>Área reservada à gerência do hotel.</p><button class='btn' style='margin-top:16px' onclick=\"go('conta')\">Ir para a conta</button>"; return; }
   const tabs = [["quartos","Quartos"],["reservas","Reservas"],["clientes","Clientes"],["conversas","Conversas"],["pagina","Página"],["definicoes","Definições"]];
   let html = "<h2 style='font-size:34px'>Painel de administração</h2><p style='color:var(--muted)'>Tudo o que se muda aqui muda no site.</p><div class='tabs' style='margin-top:18px'>";
   html += tabs.map(t => "<button class='" + (adminTab === t[0] ? "on" : "") + "' onclick=\"renderAdmin('" + t[0] + "')\">" + t[1] + "</button>").join("");
@@ -791,12 +808,12 @@ function addRoomPhoto(id, input){
 }
 function removeRoomPhoto(id, idx){ const r = roomById(id); r.photos.splice(idx, 1); saveRooms(); renderAdmin("quartos"); }
 function adminBookingsHTML(){
-  if(!BOOKINGS.length) return "<p style='color:var(--muted)'>Ainda não há reservas.</p>";
+  if(!BOOKINGS.length) return "<p style='color:var(--muted)'>As reservas dos hóspedes aparecem aqui.</p>";
   const list = BOOKINGS.slice().sort((a, b) => b.createdAt.localeCompare(a.createdAt));
   return list.map(b => {
     const r = roomById(b.roomId);
     return "<div class='admin-card'><b>" + esc(b.id) + "</b> · " + esc(b.name) + " (" + esc(b.email) + ")" +
-    "<br><span style='color:var(--muted);font-size:14px'>" + esc(r ? r.name : b.roomId) + " · " + b.in.split("-").reverse().join("/") + " → " + b.out.split("-").reverse().join("/") + " · " + b.nights + " noites · " + b.guests + " hóspedes</span>" +
+    "<br><span style='color:var(--muted);font-size:14px'>" + esc(r ? r.name : b.roomId) + " · " + fmtDate(b.in) + " → " + fmtDate(b.out) + " · " + b.nights + " noites · " + b.guests + " hóspedes</span>" +
     "<br>Total <b>" + fmt(b.total) + "</b> · Entrada <b>" + fmt(b.deposit) + "</b> · Estado <b>" + esc(b.status) + "</b> · Pagamento <b>" + esc(b.payStatus) + "</b>" +
     "<div class='row' style='margin-top:10px'>" +
     "<select onchange=\"setBookingStatus('" + b.id + "',this.value)\"><option" + (b.status === "Pendente" ? " selected" : "") + ">Pendente</option><option" + (b.status === "Confirmada" ? " selected" : "") + ">Confirmada</option><option" + (b.status === "Cancelada" ? " selected" : "") + ">Cancelada</option></select>" +
@@ -816,7 +833,7 @@ function togglePay(id){
   saveBookings(); toast("Pagamento de " + id + ": " + b.payStatus); renderAdmin("reservas");
 }
 function adminClientsHTML(){
-  if(!ACCOUNTS.length) return "<p style='color:var(--muted)'>Ainda não há contas.</p>";
+  if(!ACCOUNTS.length) return "<p style='color:var(--muted)'>Os hóspedes com conta aparecem aqui.</p>";
   return ACCOUNTS.map(a => {
     const bs = BOOKINGS.filter(b => b.email === a.email);
     const paid = bs.filter(b => b.payStatus === "Pago").reduce((s, b) => s + b.deposit, 0);
@@ -827,7 +844,7 @@ function adminClientsHTML(){
 }
 function adminChatsHTML(){
   const users = Object.keys(CHATS).filter(e => CHATS[e] && CHATS[e].length);
-  if(!users.length) return "<p style='color:var(--muted)'>Ainda não há conversas.</p>";
+  if(!users.length) return "<p style='color:var(--muted)'>As conversas com os hóspedes aparecem aqui.</p>";
   let h = "<div style='display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px'>" + users.map(e => "<button class='btn small " + (adminChatUser === e ? "" : "ghost") + "' style='" + (adminChatUser === e ? "" : "color:var(--dark);border-color:var(--dark)") + "' onclick=\"adminChatUser='" + e + "';renderAdmin('conversas')\">" + esc(e) + "</button>").join("") + "</div>";
   if(adminChatUser && CHATS[adminChatUser]){
     CHATS[adminChatUser].forEach(m => { if(m.from === "me") m.seen = true; }); saveChats();
