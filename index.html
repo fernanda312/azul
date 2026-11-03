@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AZUL · Boutique Hotel — Polana, Maputo</title>
-<meta name="description" content="AZUL — Boutique hotel na Polana, Maputo. Doze quartos entre o jardim e o Índico, piscina infinita e restaurante.">
+<title>AZUL · Hotel</title>
+<meta name="description" content="AZUL — Doze quartos entre o jardim e o Índico, piscina infinita e restaurante.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -83,6 +83,8 @@
   /* gallery */
   .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
   .gallery img{width:100%;height:230px;object-fit:cover}
+  .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}
+  .trio img{width:100%;height:220px;object-fit:cover}
   /* booking */
   .book{background:var(--ink);color:#fff}
   .book h2{font-size:clamp(32px,4.5vw,48px);margin:14px 0 12px}
@@ -111,6 +113,7 @@
     .split img{height:300px}
     .exp{grid-template-columns:1fr}
     .gallery{grid-template-columns:1fr 1fr}
+    .trio{grid-template-columns:1fr}
     .gallery img{height:170px}
     form{grid-template-columns:1fr}
     .hero-cta .btn{width:100%;text-align:center}
@@ -122,8 +125,10 @@
   <div class="wrap head">
     <a class="brand" href="#inicio">AZUL</a>
     <nav id="main-nav">
+      <a href="#hotel">O hotel</a>
       <a href="#quartos">Quartos</a>
       <a href="#restaurante">Restaurante</a>
+      <a href="#espacos">Espaços</a>
       <a href="#experiencias">Experiências</a>
       <a href="#galeria">Galeria</a>
       <a href="#reservar" class="btn" style="color:#fff">Reservar</a>
@@ -137,9 +142,9 @@
     <source src="https://videos.pexels.com/video-files/9349603/9349603-hd_1920_1080_30fps.mp4" type="video/mp4">
   </video>
   <div class="hero-inner">
-    <p class="eyebrow">Boutique hotel · Polana, Maputo</p>
+    <p class="eyebrow">Doze quartos entre o jardim e o mar</p>
     <h1>AZUL</h1>
-    <p>Doze quartos entre o jardim e o Índico. Silêncio, luz e mar, a poucos minutos do centro de Maputo.</p>
+    <p>Doze quartos entre o jardim e o Índico. Silêncio, luz e mar, a poucos minutos do centro.</p>
     <div class="hero-cta">
       <a class="btn" href="#reservar">Reservar estadia</a>
       <a class="btn light" href="#quartos">Ver quartos</a>
@@ -160,6 +165,18 @@
         <div><b>1</b><span>Piscina infinita</span></div>
         <div><b>7h–22h</b><span>Restaurante</span></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section id="hotel" style="padding-top:0">
+  <div class="wrap split">
+    <img src="https://images.pexels.com/photos/38406370/pexels-photo-38406370.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="O hotel AZUL">
+    <div>
+      <p class="eyebrow">O hotel</p>
+      <h2>A casa, vista de fora.</h2>
+      <p>Um edifício baixo, de arcos claros e pátios abertos, com a piscina a espelhar o céu. Não há pressa aqui: chega-se, pousa-se a mala e o mar trata do resto.</p>
+      <p style="margin-top:14px;color:var(--muted)">Doze quartos, uma piscina infinita, um restaurante e vários pátios para estar — tudo a poucos passos uns dos outros.</p>
     </div>
   </div>
 </section>
@@ -185,6 +202,18 @@
         </div>
       </article>
       <article class="room">
+        <img src="https://images.pexels.com/photos/7746093/pexels-photo-7746093.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Quarto Grafite">
+        <div class="room-body">
+          <h3>Quarto Grafite</h3>
+          <p class="room-meta">2 hóspedes · 30 m² · Pátio interior</p>
+          <p>Cinzento suave, geometria calma e cama larga. Para quem gosta de quartos serenos.</p>
+          <div class="room-foot">
+            <p class="price">10.500 MT <small>/ noite</small></p>
+            <a class="btn" href="#reservar" data-room="Quarto Grafite">Reservar</a>
+          </div>
+        </div>
+      </article>
+      <article class="room">
         <img src="https://images.pexels.com/photos/28347475/pexels-photo-28347475.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Quarto Mar">
         <div class="room-body">
           <h3>Quarto Mar</h3>
@@ -193,6 +222,18 @@
           <div class="room-foot">
             <p class="price">12.500 MT <small>/ noite</small></p>
             <a class="btn" href="#reservar" data-room="Quarto Mar">Reservar</a>
+          </div>
+        </div>
+      </article>
+      <article class="room">
+        <img src="https://images.pexels.com/photos/6394581/pexels-photo-6394581.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Quarto Rosa">
+        <div class="room-body">
+          <h3>Quarto Rosa</h3>
+          <p class="room-meta">2 hóspedes · 36 m² · Varanda</p>
+          <p>Veludo rosa, lustre e uma cabeceira que parece rendada. O quarto mais romântico da casa.</p>
+          <div class="room-foot">
+            <p class="price">15.500 MT <small>/ noite</small></p>
+            <a class="btn" href="#reservar" data-room="Quarto Rosa">Reservar</a>
           </div>
         </div>
       </article>
@@ -209,14 +250,14 @@
         </div>
       </article>
       <article class="room">
-        <img src="https://images.pexels.com/photos/6434586/pexels-photo-6434586.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Suite Polana">
+        <img src="https://images.pexels.com/photos/6434586/pexels-photo-6434586.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Suite Família">
         <div class="room-body">
-          <h3>Suite Polana</h3>
+          <h3>Suite Família</h3>
           <p class="room-meta">4 hóspedes · 62 m² · Sala de estar</p>
           <p>A maior da casa: quarto, sala e espaço para a família inteira, sem perder a calma.</p>
           <div class="room-foot">
             <p class="price">24.500 MT <small>/ noite</small></p>
-            <a class="btn" href="#reservar" data-room="Suite Polana">Reservar</a>
+            <a class="btn" href="#reservar" data-room="Suite Família">Reservar</a>
           </div>
         </div>
       </article>
@@ -248,13 +289,51 @@
       </div>
     </div>
   </div>
+  <div class="wrap">
+    <div class="trio">
+      <img src="https://images.pexels.com/photos/20184687/pexels-photo-20184687.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Salão do restaurante">
+      <img src="https://images.pexels.com/photos/12991640/pexels-photo-12991640.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Esplanada do restaurante">
+      <img src="https://images.pexels.com/photos/33144643/pexels-photo-33144643.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Mesa do restaurante">
+      <img src="https://images.pexels.com/photos/38406370/pexels-photo-38406370.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="O hotel ao fim do dia">
+      <img src="https://images.pexels.com/photos/14036253/pexels-photo-14036253.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Recepção">
+      <img src="https://images.pexels.com/photos/2036343/pexels-photo-2036343.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Terraço ao entardecer">
+      <img src="https://images.pexels.com/photos/8484851/pexels-photo-8484851.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Pátio da casa">
+    </div>
+  </div>
+</section>
+
+<section id="espacos" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Espaços</p>
+      <h2>Mais do que quartos.</h2>
+    </div>
+    <div class="exp">
+      <article>
+        <img src="https://images.pexels.com/photos/14036253/pexels-photo-14036253.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Recepção">
+        <div><h3>Recepção</h3><p>A entrada da casa: luz, mármore e plantas, com a equipa sempre por perto.</p></div>
+      </article>
+      <article>
+        <img src="https://images.pexels.com/photos/7821342/pexels-photo-7821342.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Sala de estar">
+        <div><h3>Sala de estar</h3><p>Poltronas, luz quente e silêncio para ler ou conversar ao fim do dia.</p></div>
+      </article>
+      <article>
+        <img src="https://images.pexels.com/photos/2036343/pexels-photo-2036343.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Terraço">
+        <div><h3>Terraço</h3><p>O fim do dia ao ar livre, com sofás, lanternas e o céu a mudar de cor.</p></div>
+      </article>
+      <article>
+        <img src="https://images.pexels.com/photos/8484851/pexels-photo-8484851.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Pátio">
+        <div><h3>Pátio</h3><p>Pátios de pedra clara e uma piscina calma entre os edifícios da casa.</p></div>
+      </article>
+    </div>
+  </div>
 </section>
 
 <section id="experiencias" style="padding-top:0">
   <div class="wrap">
     <div class="sec-head">
       <p class="eyebrow">Experiências</p>
-      <h2>Maputo, devagar.</h2>
+      <h2>A costa, devagar.</h2>
     </div>
     <div class="exp">
       <article>
@@ -267,7 +346,7 @@
       </article>
       <article>
         <img src="https://images.pexels.com/photos/5326951/pexels-photo-5326951.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Pôr do sol na baía">
-        <div><h3>Pôr do sol na baía</h3><p>O fim do dia visto do terraço, com a baía de Maputo à frente.</p></div>
+        <div><h3>Pôr do sol na baía</h3><p>O fim do dia visto do terraço, com a baía à frente.</p></div>
       </article>
     </div>
   </div>
@@ -302,9 +381,11 @@
         <label for="bk-room">Quarto</label>
         <select id="bk-room">
           <option>Quarto Jardim</option>
+          <option>Quarto Grafite</option>
           <option>Quarto Mar</option>
+          <option>Quarto Rosa</option>
           <option>Suite Azul</option>
-          <option>Suite Polana</option>
+          <option>Suite Família</option>
         </select>
       </div>
       <div>
@@ -340,14 +421,14 @@
   <div class="wrap foot">
     <div>
       <a class="brand" href="#inicio">AZUL</a>
-      <p>Boutique hotel na Polana, Maputo. Doze quartos entre o jardim e o Índico.</p>
+      <p>Doze quartos entre o jardim e o Índico.</p>
     </div>
     <div>
       <p><b>Localização</b><br>Polana, Maputo</p>
       <p style="margin-top:14px"><b>Horário</b><br>Recepção 24h · Restaurante 7h–22h</p>
     </div>
   </div>
-  <div class="wrap"><small>© <span id="year"></span> AZUL Boutique Hotel. Fotografias e vídeos de bancos de imagens livres.</small></div>
+  <div class="wrap"><small>© <span id="year"></span> AZUL Hotel. Fotografias e vídeos de bancos de imagens livres.</small></div>
 </footer>
 
 <script>
