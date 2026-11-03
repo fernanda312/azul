@@ -30,8 +30,8 @@
   .btn.light:hover{background:#fff;color:var(--ink)}
   #menu-btn{display:none;background:transparent;border:1px solid var(--line);font-size:22px;padding:6px 12px;cursor:pointer;color:var(--ink);line-height:1}
   /* hero */
-  .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;color:#fff;background:#354157}
-  .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;color:#fff;background:#1e3853}
+  .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
   .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55) 0%,rgba(0,0,0,.12) 55%,rgba(0,0,0,.25) 100%)}
   .hero-inner{position:relative;z-index:2;padding:0 24px 72px;width:100%;max-width:1160px;margin:0 auto}
   .hero-inner .eyebrow{color:#d8e9ec}
@@ -139,12 +139,10 @@
 
 <section class="hero" id="inicio" style="padding:0">
   <video id="hero-video" autoplay muted loop playsinline preload="auto">
-    <source src="https://videos.pexels.com/video-files/9349603/9349603-hd_1280_720_30fps.mp4" type="video/mp4">
+    <source src="videos/hero.mp4" type="video/mp4">
   </video>
   <div class="hero-inner">
-    <p class="eyebrow">Doze quartos entre o jardim e o mar</p>
     <h1>AZUL</h1>
-    <p>Silêncio, luz e mar, a poucos minutos do centro.</p>
     <div class="hero-cta">
       <a class="btn" href="#reservar">Reservar estadia</a>
       <a class="btn light" href="#quartos">Ver quartos</a>
