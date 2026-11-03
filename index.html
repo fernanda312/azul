@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AZUL · Boutique Hotel — Polana, Maputo</title>
+<meta name="description" content="AZUL — Boutique hotel na Polana, Maputo. Doze quartos entre o jardim e o Índico, piscina infinita e restaurante.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#faf7f2;--ink:#1b1a18;--muted:#6f6a63;--line:#e4ddd2;--sand:#c9b490;--sea:#1d4e5f;--white:#fff}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:"Manrope",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+  .eyebrow{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--sea);font-weight:700}
+  h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;line-height:1.1}
+  /* header */
+  header{position:fixed;top:0;left:0;right:0;z-index:40;background:rgba(250,247,242,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .head{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{font-family:"Cormorant Garamond",Georgia,serif;font-size:30px;letter-spacing:.34em;font-weight:500}
+  nav{display:flex;gap:28px;align-items:center}
+  nav a{font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--ink)}
+  nav a:hover{color:var(--sea)}
+  .btn{display:inline-block;background:var(--ink);color:#fff;padding:13px 26px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;border:none;cursor:pointer}
+  .btn:hover{background:var(--sea)}
+  .btn.light{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.7)}
+  .btn.light:hover{background:#fff;color:var(--ink)}
+  #menu-btn{display:none;background:transparent;border:1px solid var(--line);font-size:22px;padding:6px 12px;cursor:pointer;color:var(--ink);line-height:1}
+  /* hero */
+  .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;color:#fff}
+  .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55) 0%,rgba(0,0,0,.12) 55%,rgba(0,0,0,.25) 100%)}
+  .hero-inner{position:relative;z-index:2;padding:0 24px 72px;width:100%;max-width:1160px;margin:0 auto}
+  .hero-inner .eyebrow{color:#d8e9ec}
+  .hero h1{font-size:clamp(64px,14vw,150px);letter-spacing:.22em;margin:8px 0 10px}
+  .hero p{max-width:520px;font-size:17px;color:rgba(255,255,255,.92)}
+  .hero-cta{display:flex;gap:14px;margin-top:28px;flex-wrap:wrap}
+  /* sections */
+  section{padding:96px 0}
+  .sec-head{max-width:640px;margin-bottom:48px}
+  .sec-head h2{font-size:clamp(34px,5vw,52px);margin:14px 0 12px}
+  .sec-head p{color:var(--muted);font-size:16px}
+  .intro{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:end}
+  .intro h2{font-size:clamp(32px,4.5vw,48px)}
+  .intro p{color:var(--muted)}
+  .stats{display:flex;gap:36px;margin-top:28px;flex-wrap:wrap}
+  .stats b{display:block;font-family:"Cormorant Garamond",Georgia,serif;font-size:34px;font-weight:500}
+  .stats span{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  /* rooms */
+  .rooms{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+  .room{background:var(--white);border:1px solid var(--line);overflow:hidden}
+  .room img{width:100%;height:300px;object-fit:cover}
+  .room-body{padding:26px 26px 30px}
+  .room-body h3{font-size:30px}
+  .room-meta{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:8px 0 12px}
+  .room-body p{color:var(--muted);font-size:15px}
+  .room-foot{display:flex;justify-content:space-between;align-items:center;margin-top:20px;gap:12px;flex-wrap:wrap}
+  .price{font-family:"Cormorant Garamond",Georgia,serif;font-size:26px}
+  .price small{font-family:"Manrope",sans-serif;font-size:13px;color:var(--muted)}
+  /* video strip */
+  .strip{position:relative;padding:0}
+  .strip video{width:100%;height:62vh;min-height:380px;object-fit:cover;display:block}
+  .strip-cap{position:absolute;left:0;right:0;bottom:0;padding:28px 24px;color:#fff;background:linear-gradient(to top,rgba(0,0,0,.55),transparent)}
+  .strip-cap .wrap{padding:0}
+  .strip-cap h3{font-size:clamp(26px,4vw,40px)}
+  /* restaurant + experiences */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+  .split img{width:100%;height:440px;object-fit:cover}
+  .split h2{font-size:clamp(32px,4.5vw,48px);margin:14px 0 12px}
+  .split p{color:var(--muted)}
+  .hours{margin-top:22px;border-top:1px solid var(--line)}
+  .hours div{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px}
+  .hours span:first-child{color:var(--muted)}
+  .exp{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .exp article{background:var(--white);border:1px solid var(--line);overflow:hidden}
+  .exp img{width:100%;height:230px;object-fit:cover}
+  .exp div{padding:22px 22px 26px}
+  .exp h3{font-size:26px;margin-bottom:6px}
+  .exp p{color:var(--muted);font-size:15px}
+  /* gallery */
+  .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .gallery img{width:100%;height:230px;object-fit:cover}
+  /* booking */
+  .book{background:var(--ink);color:#fff}
+  .book h2{font-size:clamp(32px,4.5vw,48px);margin:14px 0 12px}
+  .book p{color:rgba(255,255,255,.75)}
+  .book .eyebrow{color:var(--sand)}
+  form{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px}
+  label{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.7);display:block;margin-bottom:6px}
+  input,select{width:100%;padding:14px;border:1px solid rgba(255,255,255,.25);background:transparent;color:#fff;font:inherit;font-size:15px}
+  input::-webkit-calendar-picker-indicator{filter:invert(1)}
+  select option{color:#222}
+  form .full{grid-column:1 / -1}
+  .note{font-size:14px;color:rgba(255,255,255,.6);margin-top:16px}
+  footer{padding:56px 0;border-top:1px solid var(--line)}
+  .foot{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap}
+  .foot .brand{font-size:26px}
+  .foot p{color:var(--muted);font-size:14px;max-width:340px}
+  .foot small{display:block;margin-top:28px;color:var(--muted);font-size:13px}
+  @media (max-width:768px){
+    nav{display:none;position:absolute;top:64px;left:0;right:0;background:var(--bg);flex-direction:column;align-items:flex-start;padding:20px 24px;border-bottom:1px solid var(--line);gap:18px}
+    nav.open{display:flex}
+    #menu-btn{display:block}
+    section{padding:64px 0}
+    .intro,.split{grid-template-columns:1fr;gap:28px}
+    .rooms{grid-template-columns:1fr}
+    .room img{height:240px}
+    .split img{height:300px}
+    .exp{grid-template-columns:1fr}
+    .gallery{grid-template-columns:1fr 1fr}
+    .gallery img{height:170px}
+    form{grid-template-columns:1fr}
+    .hero-cta .btn{width:100%;text-align:center}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap head">
+    <a class="brand" href="#inicio">AZUL</a>
+    <nav id="main-nav">
+      <a href="#quartos">Quartos</a>
+      <a href="#restaurante">Restaurante</a>
+      <a href="#experiencias">Experiências</a>
+      <a href="#galeria">Galeria</a>
+      <a href="#reservar" class="btn" style="color:#fff">Reservar</a>
+    </nav>
+    <button id="menu-btn" type="button" aria-label="Menu">☰</button>
+  </div>
+</header>
+
+<section class="hero" id="inicio" style="padding:0">
+  <video autoplay muted loop playsinline poster="https://images.pexels.com/photos/4025955/pexels-photo-4025955.jpeg?auto=compress&cs=tinysrgb&w=1600">
+    <source src="https://videos.pexels.com/video-files/9349603/9349603-hd_1920_1080_30fps.mp4" type="video/mp4">
+  </video>
+  <div class="hero-inner">
+    <p class="eyebrow">Boutique hotel · Polana, Maputo</p>
+    <h1>AZUL</h1>
+    <p>Doze quartos entre o jardim e o Índico. Silêncio, luz e mar, a poucos minutos do centro de Maputo.</p>
+    <div class="hero-cta">
+      <a class="btn" href="#reservar">Reservar estadia</a>
+      <a class="btn light" href="#quartos">Ver quartos</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap intro">
+    <div>
+      <p class="eyebrow">Bem-vindo ao Azul</p>
+      <h2>Um hotel pequeno, pensado para descansar de verdade.</h2>
+    </div>
+    <div>
+      <p>Nada de corredores compridos nem multidões. No Azul, cada quarto abre para o jardim ou para o mar, o pequeno-almoço chega sem pressa e a piscina fica virada ao Índico o dia inteiro.</p>
+      <div class="stats">
+        <div><b>12</b><span>Quartos</span></div>
+        <div><b>1</b><span>Piscina infinita</span></div>
+        <div><b>7h–22h</b><span>Restaurante</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="quartos" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Quartos</p>
+      <h2>Escolhe o teu canto.</h2>
+      <p>Todos os quartos incluem pequeno-almoço, Wi-Fi e acesso à piscina. Preços por noite.</p>
+    </div>
+    <div class="rooms">
+      <article class="room">
+        <img src="https://images.pexels.com/photos/7166559/pexels-photo-7166559.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Quarto Jardim">
+        <div class="room-body">
+          <h3>Quarto Jardim</h3>
+          <p class="room-meta">2 hóspedes · 28 m² · Jardim privado</p>
+          <p>Luz suave, cortinas azuis e uma porta directa para o jardim. O quarto mais calmo da casa.</p>
+          <div class="room-foot">
+            <p class="price">8.500 MT <small>/ noite</small></p>
+            <a class="btn" href="#reservar" data-room="Quarto Jardim">Reservar</a>
+          </div>
+        </div>
+      </article>
+      <article class="room">
+        <img src="https://images.pexels.com/photos/28347475/pexels-photo-28347475.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Quarto Mar">
+        <div class="room-body">
+          <h3>Quarto Mar</h3>
+          <p class="room-meta">2 hóspedes · 34 m² · Vista mar</p>
+          <p>Madeira quente, cama larga e a primeira coisa que vês ao acordar é o Índico.</p>
+          <div class="room-foot">
+            <p class="price">12.500 MT <small>/ noite</small></p>
+            <a class="btn" href="#reservar" data-room="Quarto Mar">Reservar</a>
+          </div>
+        </div>
+      </article>
+      <article class="room">
+        <img src="https://images.pexels.com/photos/6782567/pexels-photo-6782567.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Suite Azul">
+        <div class="room-body">
+          <h3>Suite Azul</h3>
+          <p class="room-meta">3 hóspedes · 48 m² · Varanda</p>
+          <p>Tons claros, cama king e varanda para o fim da tarde. A preferida dos casais.</p>
+          <div class="room-foot">
+            <p class="price">18.500 MT <small>/ noite</small></p>
+            <a class="btn" href="#reservar" data-room="Suite Azul">Reservar</a>
+          </div>
+        </div>
+      </article>
+      <article class="room">
+        <img src="https://images.pexels.com/photos/6434586/pexels-photo-6434586.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Suite Polana">
+        <div class="room-body">
+          <h3>Suite Polana</h3>
+          <p class="room-meta">4 hóspedes · 62 m² · Sala de estar</p>
+          <p>A maior da casa: quarto, sala e espaço para a família inteira, sem perder a calma.</p>
+          <div class="room-foot">
+            <p class="price">24.500 MT <small>/ noite</small></p>
+            <a class="btn" href="#reservar" data-room="Suite Polana">Reservar</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="strip">
+  <video autoplay muted loop playsinline preload="metadata" poster="https://images.pexels.com/photos/4025955/pexels-photo-4025955.jpeg?auto=compress&cs=tinysrgb&w=1600">
+    <source src="https://videos.pexels.com/video-files/9531187/9531187-hd_1920_1080_30fps.mp4" type="video/mp4">
+  </video>
+  <div class="strip-cap"><div class="wrap">
+    <p class="eyebrow" style="color:#d8e9ec">A piscina</p>
+    <h3>Infinita, virada ao Índico.</h3>
+  </div></div>
+</section>
+
+<section id="restaurante">
+  <div class="wrap split">
+    <img src="https://images.pexels.com/photos/735869/pexels-photo-735869.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Restaurante do hotel">
+    <div>
+      <p class="eyebrow">Restaurante</p>
+      <h2>Cozinha do Índico, sem pressa.</h2>
+      <p>Peixe grelhado, camarão, arroz de coco e o pequeno-almoço incluído em todas as estadias. À noite, o terraço fica só com o som do mar.</p>
+      <div class="hours">
+        <div><span>Pequeno-almoço</span><span>7h – 10h30</span></div>
+        <div><span>Almoço</span><span>12h – 15h</span></div>
+        <div><span>Jantar</span><span>18h30 – 22h</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experiencias" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Experiências</p>
+      <h2>Maputo, devagar.</h2>
+    </div>
+    <div class="exp">
+      <article>
+        <img src="https://images.pexels.com/photos/14013218/pexels-photo-14013218.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Passeio de barco">
+        <div><h3>Passeio de barco</h3><p>Inhaca e os bancos de areia, com saída de manhã e regresso ao pôr do sol.</p></div>
+      </article>
+      <article>
+        <img src="https://images.pexels.com/photos/7955122/pexels-photo-7955122.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Praia e palmeiras">
+        <div><h3>Praia e palmeiras</h3><p>Manhãs na areia, mar calmo e sombra de palmeira a dois passos do quarto.</p></div>
+      </article>
+      <article>
+        <img src="https://images.pexels.com/photos/5326951/pexels-photo-5326951.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Pôr do sol na baía">
+        <div><h3>Pôr do sol na baía</h3><p>O fim do dia visto do terraço, com a baía de Maputo à frente.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="galeria" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Galeria</p>
+      <h2>A casa, em imagens.</h2>
+    </div>
+    <div class="gallery">
+      <img src="https://images.pexels.com/photos/4025955/pexels-photo-4025955.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Piscina e praia">
+      <img src="https://images.pexels.com/photos/14021097/pexels-photo-14021097.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Vista aérea do hotel">
+      <img src="https://images.pexels.com/photos/5326951/pexels-photo-5326951.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Baía vista de cima">
+      <img src="https://images.pexels.com/photos/33144643/pexels-photo-33144643.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Mesa do restaurante">
+    </div>
+  </div>
+</section>
+
+<section class="book" id="reservar">
+  <div class="wrap">
+    <p class="eyebrow">Reservas</p>
+    <h2>Reserva a tua estadia.</h2>
+    <p>Preenche e envia: o pedido segue para o WhatsApp do hotel e a equipa confirma a disponibilidade. Check-in às 14h, check-out às 11h.</p>
+    <form id="book-form">
+      <div>
+        <label for="bk-name">Nome</label>
+        <input type="text" id="bk-name" placeholder="O teu nome" required>
+      </div>
+      <div>
+        <label for="bk-room">Quarto</label>
+        <select id="bk-room">
+          <option>Quarto Jardim</option>
+          <option>Quarto Mar</option>
+          <option>Suite Azul</option>
+          <option>Suite Polana</option>
+        </select>
+      </div>
+      <div>
+        <label for="bk-in">Entrada</label>
+        <input type="date" id="bk-in" required>
+      </div>
+      <div>
+        <label for="bk-out">Saída</label>
+        <input type="date" id="bk-out" required>
+      </div>
+      <div>
+        <label for="bk-guests">Hóspedes</label>
+        <select id="bk-guests">
+          <option>1 hóspede</option>
+          <option selected>2 hóspedes</option>
+          <option>3 hóspedes</option>
+          <option>4 hóspedes</option>
+        </select>
+      </div>
+      <div>
+        <label for="bk-note">Pedido especial (opcional)</label>
+        <input type="text" id="bk-note" placeholder="Ex.: cama extra, aniversário">
+      </div>
+      <div class="full">
+        <button class="btn" type="submit" style="background:var(--sand);color:var(--ink);width:100%">Pedir reserva no WhatsApp</button>
+      </div>
+    </form>
+    <p class="note">Nesta versão, a reserva é confirmada pela equipa no WhatsApp. O pagamento é combinado na confirmação.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <a class="brand" href="#inicio">AZUL</a>
+      <p>Boutique hotel na Polana, Maputo. Doze quartos entre o jardim e o Índico.</p>
+    </div>
+    <div>
+      <p><b>Localização</b><br>Polana, Maputo</p>
+      <p style="margin-top:14px"><b>Horário</b><br>Recepção 24h · Restaurante 7h–22h</p>
+    </div>
+  </div>
+  <div class="wrap"><small>© <span id="year"></span> AZUL Boutique Hotel. Fotografias e vídeos de bancos de imagens livres.</small></div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  var menuBtn = document.getElementById('menu-btn');
+  var mainNav = document.getElementById('main-nav');
+  menuBtn.addEventListener('click', function(){ mainNav.classList.toggle('open'); });
+  mainNav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ mainNav.classList.remove('open'); });
+  });
+  document.querySelectorAll('[data-room]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.getElementById('bk-room').value = btn.getAttribute('data-room');
+    });
+  });
+  document.getElementById('book-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = document.getElementById('bk-name').value.trim();
+    var room = document.getElementById('bk-room').value;
+    var din = document.getElementById('bk-in').value;
+    var dout = document.getElementById('bk-out').value;
+    var guests = document.getElementById('bk-guests').value;
+    var note = document.getElementById('bk-note').value.trim();
+    var msg = 'Olá AZUL! Quero reservar: ' + room + ' | ' + name + ' | Entrada: ' + din + ' | Saída: ' + dout + ' | ' + guests + (note ? ' | ' + note : '');
+    window.open('https://wa.me/258840000000?text=' + encodeURIComponent(msg), '_blank');
+  });
+</script>
+</body>
+</html>
