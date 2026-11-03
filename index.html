@@ -129,9 +129,17 @@ th{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute
 .avail-stats b{color:var(--ink);font-size:15px}
 .sec-head{border-bottom:1px solid var(--line);padding-bottom:22px}
 .note{font-size:13px;color:var(--muted);margin-top:12px}
-.policy{background:#f4efe6;border-radius:16px;padding:26px}
-.policy h3{font-size:26px;margin-bottom:10px}
-.policy li{margin:6px 0 6px 18px;font-size:14px;color:var(--muted)}
+.policy{background:#fff;border:1px solid #e7e0d3;border-radius:20px;padding:28px;box-shadow:0 8px 30px rgba(30,40,60,.06)}
+.policy h3{font-size:28px;margin-bottom:4px}
+.pol-dep{display:flex;align-items:center;gap:18px;background:#f4efe6;border-radius:14px;padding:18px 20px;margin:18px 0 8px}
+.pol-num{font-family:'Cormorant Garamond',serif;font-size:46px;line-height:1;color:var(--ink);flex-shrink:0}
+.pol-dep p{font-size:14px;color:var(--muted);line-height:1.65}
+.pol-dep p b{color:var(--ink)}
+.pol-row{display:grid;grid-template-columns:118px 1fr auto;gap:14px;align-items:baseline;padding:16px 0;border-top:1px solid #ece5d8}
+.pol-when{font-weight:700;font-size:14px}
+.pol-rule{font-size:14px;color:var(--muted);line-height:1.6}
+.pol-back{font-family:'Cormorant Garamond',serif;font-size:18px;white-space:nowrap}
+@media(max-width:600px){.pol-row{grid-template-columns:1fr auto}.pol-rule{grid-column:1/3}.pol-num{font-size:38px}}
 .receipt{background:#fff;border:1px dashed var(--sand);border-radius:14px;padding:22px}
 .receipt h3{font-size:24px;letter-spacing:.08em}
 .receipt .row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #f0e9db;font-size:14px}
@@ -242,6 +250,10 @@ th{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute
         <div><div class="ph"><img src="https://images.pexels.com/photos/7821342/pexels-photo-7821342.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Sala de estar"></div><p>Sala de estar</p></div>
         <div><div class="ph"><img src="https://images.pexels.com/photos/2036343/pexels-photo-2036343.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Terraço"></div><p>Terraço</p></div>
         <div><div class="ph"><img src="https://images.pexels.com/photos/8484851/pexels-photo-8484851.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Pátio"></div><p>Pátio</p></div>
+        <div><div class="ph"><img src="https://images.pexels.com/photos/7974837/pexels-photo-7974837.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Piscina"></div><p>Piscina</p></div>
+        <div><div class="ph"><img src="https://images.pexels.com/photos/5490907/pexels-photo-5490907.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Bar"></div><p>Bar</p></div>
+        <div><div class="ph"><img src="https://images.pexels.com/photos/4716816/pexels-photo-4716816.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Ginásio"></div><p>Ginásio</p></div>
+        <div><div class="ph"><img src="https://images.pexels.com/photos/15528970/pexels-photo-15528970.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Spa"></div><p>Spa</p></div>
       </div>
     </div>
     <div class="sec" id="experiencias" style="padding-top:0">
@@ -263,6 +275,12 @@ th{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute
         <div class="ph"><img src="https://images.pexels.com/photos/14036253/pexels-photo-14036253.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Recepção"></div>
         <div class="ph"><img src="https://images.pexels.com/photos/2036343/pexels-photo-2036343.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Terraço"></div>
         <div class="ph"><img src="https://images.pexels.com/photos/8484851/pexels-photo-8484851.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Pátio"></div>
+        <div class="ph"><img src="https://images.pexels.com/photos/31387423/pexels-photo-31387423.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Piscina vista de cima"></div>
+        <div class="ph"><img src="https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Hotel ao entardecer"></div>
+        <div class="ph"><img src="https://images.pexels.com/photos/18320907/pexels-photo-18320907.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Pátio com arcos"></div>
+        <div class="ph"><img src="https://images.pexels.com/photos/15010963/pexels-photo-15010963.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Átrio"></div>
+        <div class="ph"><img src="https://images.pexels.com/photos/8918652/pexels-photo-8918652.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Recepção e bar"></div>
+        <div class="ph"><img src="https://images.pexels.com/photos/35022069/pexels-photo-35022069.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Sala com vista para o jardim"></div>
       </div>
     </div>
     <div class="sec" style="padding-top:0">
@@ -284,15 +302,15 @@ th{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute
     <div class="sec-head"><p class="eyebrow">Quartos</p><h2>111 quartos, 6 tipos.</h2><p>Preços por noite, com pequeno-almoço incluído. Toca num quarto para ver todas as fotos, o que tem e a disponibilidade.</p></div>
     <div class="room-grid" id="rooms-page"></div>
     <div class="policy" style="margin-top:44px">
+      <p class="eyebrow">Reservas</p>
       <h3>Entrada e reembolsos</h3>
-      <p style="font-size:14px;color:var(--muted)">A reserva confirma-se com uma entrada de <b style="color:var(--ink)">metade do valor total</b>. Essa entrada conta para o pagamento final, pago no hotel. O resto paga-se na chegada.</p>
-      <ul>
-        <li><b>7 ou mais dias antes da entrada:</b> a entrada é devolvida na totalidade.</li>
-        <li><b>De 3 a 6 dias antes da entrada:</b> é devolvida metade da entrada.</li>
-        <li><b>Menos de 3 dias antes, ou se não apareceres na data sem aviso:</b> a entrada não é devolvida.</li>
-        <li>Se o hotel cancelar, a entrada é sempre devolvida na totalidade.</li>
-      </ul>
-      <p class="note">Estas regras podem ser ajustadas no painel de administração, em Definições.</p>
+      <div class="pol-dep"><div class="pol-num" id="pol-num">50%</div><p>A reserva confirma-se com uma entrada. Essa entrada <b>conta para o pagamento final</b>, pago no hotel. O resto paga-se na chegada.</p></div>
+      <div class="pol-rules">
+        <div class="pol-row"><div class="pol-when">7 ou mais dias</div><div class="pol-rule">Cancelamento antes da entrada, com aviso.</div><div class="pol-back">Devolvida na totalidade</div></div>
+        <div class="pol-row"><div class="pol-when">3 a 6 dias</div><div class="pol-rule">Cancelamento antes da entrada, com aviso.</div><div class="pol-back">Devolvida metade</div></div>
+        <div class="pol-row"><div class="pol-when">Menos de 3 dias</div><div class="pol-rule">Ou se não apareceres na data sem aviso.</div><div class="pol-back">Sem devolução</div></div>
+        <div class="pol-row"><div class="pol-when">O hotel cancela</div><div class="pol-rule">Em qualquer altura, por decisão do hotel.</div><div class="pol-back">Devolvida na totalidade</div></div>
+      </div>
     </div>
   </div>
 </div></section>
@@ -344,7 +362,7 @@ th{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute
     <div class="foot">
       <div>
         <h3>AZUL</h3>
-        <p style="margin-top:8px">Localização — Polana, Maputo</p>
+        <p style="margin-top:8px" id="foot-address">Av. Marginal, 4521, Polana, Maputo, Moçambique</p>
         <p>Entrada 14h · Saída 11h</p>
       </div>
       <nav>
@@ -386,14 +404,14 @@ th{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute
 <script>
 const px = id => "https://images.pexels.com/photos/" + id + "/pexels-photo-" + id + ".jpeg?auto=compress&cs=tinysrgb&w=1200";
 const DEFAULT_ROOMS = [
-  {id:"jardim", name:"Quarto Jardim", price:8500, units:30, guests:2, size:28, beds:"Cama de casal", desc:"Virado ao jardim, com terraço e luz da manhã.", amenities:["Cama de casal","Varanda","Ar condicionado","Wi-Fi","TV","Casa de banho privativa","Pequeno-almoço incluído"], photos:[px(7166559),px(133920),px(7031876)]},
-  {id:"grafite", name:"Quarto Grafite", price:10500, units:18, guests:2, size:30, beds:"Duas camas", desc:"Tons escuros, madeira e calma. Ideal para dois amigos ou colegas.", amenities:["Duas camas","Ar condicionado","Wi-Fi","TV","Casa de banho privativa","Pequeno-almoço incluído"], photos:[px(7746093),px(14021932),px(19916729)]},
-  {id:"mar", name:"Quarto Mar", price:12500, units:22, guests:2, size:32, beds:"Cama de casal", desc:"Acordar com o mar à janela e o pequeno-almoço no terraço.", amenities:["Cama de casal","Vista mar","Varanda","Ar condicionado","Wi-Fi","TV","Casa de banho privativa","Pequeno-almoço incluído"], photos:[px(28347475),px(19799232),px(6775271)]},
-  {id:"rosa", name:"Quarto Rosa", price:15500, units:12, guests:2, size:36, beds:"Cama de casal", desc:"Suave e luminoso, com varanda sobre a praia.", amenities:["Cama de casal","Varanda","Ar condicionado","Wi-Fi","TV","Casa de banho privativa","Pequeno-almoço incluído"], photos:[px(6394581),px(31399459),px(7027715)]},
-  {id:"azul", name:"Suite Azul", price:18500, units:14, guests:3, size:52, beds:"Cama de casal + sala", desc:"Sala própria, quarto amplo e vista desafogada.", amenities:["Cama de casal","Sala de estar","Vista mar","Ar condicionado","Wi-Fi","TV","Casa de banho privativa","Pequeno-almoço incluído"], photos:[px(6782567),px(7174113),px(7031733)]},
-  {id:"familia", name:"Suite Família", price:24500, units:15, guests:5, size:64, beds:"Cama de casal + duas camas", desc:"Para a família toda: quarto de casal, dois lugares extra e sala.", amenities:["Cama de casal","Duas camas","Sala de estar","Ar condicionado","Wi-Fi","TV","Casa de banho privativa","Pequeno-almoço incluído"], photos:[px(6434586),px(14025033),px(5629141)]}
+  {id:"jardim", name:"Quarto Jardim", price:8500, units:30, guests:2, size:28, beds:"Cama de casal", desc:"Virado ao jardim, com terraço e luz da manhã.", amenities:["Cama de casal","Varanda","Ar condicionado","Wi-Fi","TV","Casa de banho privativa","Pequeno-almoço incluído"], photos:[px(7166559),px(133920),px(7031876),px(16436959),px(14025911)]},
+  {id:"grafite", name:"Quarto Grafite", price:10500, units:18, guests:2, size:30, beds:"Duas camas", desc:"Tons escuros, madeira e calma. Ideal para dois amigos ou colegas.", amenities:["Duas camas","Ar condicionado","Wi-Fi","TV","Casa de banho privativa","Pequeno-almoço incluído"], photos:[px(7746093),px(14021932),px(19916729),px(8081396),px(7746084)]},
+  {id:"mar", name:"Quarto Mar", price:12500, units:22, guests:2, size:32, beds:"Cama de casal", desc:"Acordar com o mar à janela e o pequeno-almoço no terraço.", amenities:["Cama de casal","Vista mar","Varanda","Ar condicionado","Wi-Fi","TV","Casa de banho privativa","Pequeno-almoço incluído"], photos:[px(28347475),px(19799232),px(6775271),px(34016639),px(6186815)]},
+  {id:"rosa", name:"Quarto Rosa", price:15500, units:12, guests:2, size:36, beds:"Cama de casal", desc:"Suave e luminoso, com varanda sobre a praia.", amenities:["Cama de casal","Varanda","Ar condicionado","Wi-Fi","TV","Casa de banho privativa","Pequeno-almoço incluído"], photos:[px(6394581),px(31399459),px(7027715),px(16436951),px(19227243)]},
+  {id:"azul", name:"Suite Azul", price:18500, units:14, guests:3, size:52, beds:"Cama de casal + sala", desc:"Sala própria, quarto amplo e vista desafogada.", amenities:["Cama de casal","Sala de estar","Vista mar","Ar condicionado","Wi-Fi","TV","Casa de banho privativa","Pequeno-almoço incluído"], photos:[px(6782567),px(7174113),px(7031733),px(24405955),px(19916738)]},
+  {id:"familia", name:"Suite Família", price:24500, units:15, guests:5, size:64, beds:"Cama de casal + duas camas", desc:"Para a família toda: quarto de casal, dois lugares extra e sala.", amenities:["Cama de casal","Duas camas","Sala de estar","Ar condicionado","Wi-Fi","TV","Casa de banho privativa","Pequeno-almoço incluído"], photos:[px(6434586),px(14025033),px(5629141),px(14025909),px(10813264)]}
 ];
-const DEFAULT_SETTINGS = {whatsapp:"258840000000", checkin:"14h", checkout:"11h", depositPct:50, paymentNote:""};
+const DEFAULT_SETTINGS = {whatsapp:"258840000000", checkin:"14h", checkout:"11h", depositPct:50, paymentNote:"", address:"Av. Marginal, 4521, Polana, Maputo, Moçambique"};
 const store = {
   get(k, d){ try{ const v = JSON.parse(localStorage.getItem(k)); return v === null || v === undefined ? d : v; }catch(e){ return d; } },
   set(k, v){ localStorage.setItem(k, JSON.stringify(v)); }
@@ -873,6 +891,7 @@ function adminSettingsHTML(){
   return "<div class='form'><label>WhatsApp do hotel (só números, com indicativo)</label><input id='st-wa' value='" + esc(SETTINGS.whatsapp) + "'>" +
   "<label>Entrada</label><input id='st-in' value='" + esc(SETTINGS.checkin) + "'>" +
   "<label>Saída</label><input id='st-out' value='" + esc(SETTINGS.checkout) + "'>" +
+  "<label>Morada do hotel</label><input id='st-addr' value='" + esc(SETTINGS.address || "Av. Marginal, 4521, Polana, Maputo, Moçambique") + "'>" +
   "<label>Entrada para reservar (%)</label><input id='st-dep' type='number' value='" + SETTINGS.depositPct + "'>" +
   "<label>Formas de pagamento (texto mostrado na página de pagamento)</label><textarea id='st-pay' placeholder='Ex.: Paga a entrada por M-Pesa para o número…'>" + esc(SETTINGS.paymentNote || "") + "</textarea>" +
   "<button class='btn' style='margin-top:16px' onclick='saveSettingsForm()'>Guardar definições</button>" +
@@ -882,6 +901,7 @@ function saveSettingsForm(){
   SETTINGS.whatsapp = document.getElementById("st-wa").value.replace(/\D/g, "") || SETTINGS.whatsapp;
   SETTINGS.checkin = document.getElementById("st-in").value.trim() || SETTINGS.checkin;
   SETTINGS.checkout = document.getElementById("st-out").value.trim() || SETTINGS.checkout;
+  SETTINGS.address = document.getElementById("st-addr").value.trim() || SETTINGS.address;
   const d = parseInt(document.getElementById("st-dep").value, 10);
   if(d >= 0 && d <= 100) SETTINGS.depositPct = d;
   SETTINGS.paymentNote = document.getElementById("st-pay").value.trim();
@@ -891,6 +911,10 @@ function applyPageTexts(){
   const it = document.getElementById("intro-text"), ht = document.getElementById("hotel-text");
   if(it && SETTINGS.introText) it.textContent = SETTINGS.introText;
   if(ht && SETTINGS.hotelText) ht.textContent = SETTINGS.hotelText;
+  const fa = document.getElementById("foot-address");
+  if(fa && SETTINGS.address) fa.textContent = SETTINGS.address;
+  const pn = document.getElementById("pol-num");
+  if(pn) pn.textContent = SETTINGS.depositPct + "%";
 }
 function openChatFab(){
   const u = me();
