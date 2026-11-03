@@ -141,8 +141,8 @@
 </header>
 
 <section class="hero" id="inicio" style="padding:0">
-  <video autoplay muted loop playsinline poster="https://images.pexels.com/photos/4025955/pexels-photo-4025955.jpeg?auto=compress&cs=tinysrgb&w=1600">
-    <source src="https://videos.pexels.com/video-files/9349603/9349603-hd_1920_1080_30fps.mp4" type="video/mp4">
+  <video id="hero-video" autoplay muted loop playsinline preload="auto">
+    <source src="https://videos.pexels.com/video-files/9349603/9349603-hd_1280_720_30fps.mp4" type="video/mp4">
   </video>
   <div class="hero-inner">
     <p class="eyebrow">Doze quartos entre o jardim e o mar</p>
@@ -270,7 +270,7 @@
 
 <section class="strip">
   <video autoplay muted loop playsinline preload="metadata" poster="https://images.pexels.com/photos/4025955/pexels-photo-4025955.jpeg?auto=compress&cs=tinysrgb&w=1600">
-    <source src="https://videos.pexels.com/video-files/9531187/9531187-hd_1920_1080_30fps.mp4" type="video/mp4">
+    <source src="https://videos.pexels.com/video-files/9531187/9531187-hd_1280_720_30fps.mp4" type="video/mp4">
   </video>
   <div class="strip-cap"><div class="wrap">
     <p class="eyebrow" style="color:#d8e9ec">A piscina</p>
@@ -436,6 +436,8 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+  var hv = document.getElementById('hero-video');
+  if (hv) { var p = hv.play(); if (p) { p.catch(function(){}); } }
   var menuBtn = document.getElementById('menu-btn');
   var mainNav = document.getElementById('main-nav');
   menuBtn.addEventListener('click', function(){ mainNav.classList.toggle('open'); });
