@@ -11,7 +11,7 @@
   :root{--bg:#faf7f2;--ink:#1b1a18;--muted:#6f6a63;--line:#e4ddd2;--sand:#c9b490;--sea:#1d4e5f;--white:#fff}
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{font-family:"Manrope",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  body{font-family:"Manrope",system-ui,sans-serif;background:linear-gradient(180deg,#354157 0%,#46566e 35%,#8b98a8 55%,#e8d7bd 72%,#ffe6c8 88%,#ffe6c8 100%);background-attachment:scroll;color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
   a{color:inherit;text-decoration:none}
   img{display:block;max-width:100%}
   .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
@@ -30,8 +30,8 @@
   .btn.light:hover{background:#fff;color:var(--ink)}
   #menu-btn{display:none;background:transparent;border:1px solid var(--line);font-size:22px;padding:6px 12px;cursor:pointer;color:var(--ink);line-height:1}
   /* hero */
-  .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;color:#fff;background:linear-gradient(135deg,#354157 0%,#46566e 45%,#8b98a8 65%,#e8d7bd 82%,#ffe6c8 100%)}
-  .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+  .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;color:#fff;background:#354157}
+  .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
   .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55) 0%,rgba(0,0,0,.12) 55%,rgba(0,0,0,.25) 100%)}
   .hero-inner{position:relative;z-index:2;padding:0 24px 72px;width:100%;max-width:1160px;margin:0 auto}
   .hero-inner .eyebrow{color:#d8e9ec}
@@ -49,6 +49,9 @@
   .stats{display:flex;gap:36px;margin-top:28px;flex-wrap:wrap}
   .stats b{display:block;font-family:"Cormorant Garamond",Georgia,serif;font-size:34px;font-weight:500}
   .stats span{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .intro h2,.intro .stats b,#hotel h2,#quartos .sec-head h2{color:#fff}
+  .intro p,.intro .stats span,#hotel p,#quartos .sec-head p{color:rgba(255,255,255,.85)}
+  .intro .eyebrow,#hotel .eyebrow,#quartos .sec-head .eyebrow{color:var(--sand)}
   /* rooms */
   .rooms{display:grid;grid-template-columns:1fr 1fr;gap:28px}
   .room{background:var(--white);border:1px solid var(--line);overflow:hidden}
@@ -61,8 +64,8 @@
   .price{font-family:"Cormorant Garamond",Georgia,serif;font-size:26px}
   .price small{font-family:"Manrope",sans-serif;font-size:13px;color:var(--muted)}
   /* video strip */
-  .strip{position:relative;padding:0;background:linear-gradient(135deg,#354157 0%,#46566e 45%,#8b98a8 65%,#e8d7bd 82%,#ffe6c8 100%)}
-  .strip video{width:100%;height:62vh;min-height:380px;object-fit:contain;display:block}
+  .strip{position:relative;padding:0;background:#354157}
+  .strip video{width:100%;height:62vh;min-height:380px;object-fit:cover;display:block}
   .strip-cap{position:absolute;left:0;right:0;bottom:0;padding:28px 24px;color:#fff;background:linear-gradient(to top,rgba(0,0,0,.55),transparent)}
   .strip-cap .wrap{padding:0}
   .strip-cap h3{font-size:clamp(26px,4vw,40px)}
