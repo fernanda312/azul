@@ -4,457 +4,948 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AZUL · Hotel</title>
-<meta name="description" content="AZUL — Silêncio, luz e mar, com piscina infinita e restaurante.">
+<meta name="description" content="AZUL — Hotel. Piscina infinita, restaurante e pátios para estar.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#faf7f2;--ink:#1b1a18;--muted:#6f6a63;--line:#e4ddd2;--sand:#c9b490;--sea:#1d4e5f;--white:#fff}
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{font-family:"Manrope",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
-  a{color:inherit;text-decoration:none}
-  img{display:block;max-width:100%}
-  .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
-  .eyebrow{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--sea);font-weight:700}
-  h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;line-height:1.1}
-  /* header */
-  header{position:fixed;top:0;left:0;right:0;z-index:40;background:rgba(250,247,242,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-  .head{display:flex;align-items:center;justify-content:space-between;height:64px}
-  .brand{font-family:"Cormorant Garamond",Georgia,serif;font-size:30px;letter-spacing:.34em;font-weight:500}
-  nav{display:flex;gap:28px;align-items:center}
-  nav a{font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--ink)}
-  nav a:hover{color:var(--sea)}
-  .btn{display:inline-block;background:var(--ink);color:#fff;padding:13px 26px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;border:none;cursor:pointer}
-  .btn:hover{background:var(--sea)}
-  .btn.light{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.7)}
-  .btn.light:hover{background:#fff;color:var(--ink)}
-  #menu-btn{display:none;background:transparent;border:1px solid var(--line);font-size:22px;padding:6px 12px;cursor:pointer;color:var(--ink);line-height:1}
-  /* hero */
-  .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;color:#fff;background:#1e3853}
-  .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
-  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55) 0%,rgba(0,0,0,.12) 55%,rgba(0,0,0,.25) 100%)}
-  .hero-inner{position:relative;z-index:2;padding:0 24px 72px;width:100%;max-width:1160px;margin:0 auto}
-  .hero-inner .eyebrow{color:#d8e9ec}
-  .hero h1{font-size:clamp(64px,14vw,150px);letter-spacing:.22em;margin:8px 0 10px}
-  .hero p{max-width:520px;font-size:17px;color:rgba(255,255,255,.92)}
-  .hero-cta{display:flex;gap:14px;margin-top:28px;flex-wrap:wrap}
-  /* sections */
-  section{padding:96px 0}
-  .sec-head{max-width:640px;margin-bottom:48px}
-  .sec-head h2{font-size:clamp(34px,5vw,52px);margin:14px 0 12px}
-  .sec-head p{color:var(--muted);font-size:16px}
-  .intro{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:end}
-  .intro h2{font-size:clamp(32px,4.5vw,48px)}
-  .intro p{color:var(--muted)}
-  .stats{display:flex;gap:36px;margin-top:28px;flex-wrap:wrap}
-  .stats b{display:block;font-family:"Cormorant Garamond",Georgia,serif;font-size:34px;font-weight:500}
-  .stats span{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
-  /* rooms */
-  .rooms{display:grid;grid-template-columns:1fr 1fr;gap:28px}
-  .room{background:var(--white);border:1px solid var(--line);overflow:hidden}
-  .room img{width:100%;height:300px;object-fit:cover}
-  .room-body{padding:26px 26px 30px}
-  .room-body h3{font-size:30px}
-  .room-meta{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:8px 0 12px}
-  .room-body p{color:var(--muted);font-size:15px}
-  .room-foot{display:flex;justify-content:space-between;align-items:center;margin-top:20px;gap:12px;flex-wrap:wrap}
-  .price{font-family:"Cormorant Garamond",Georgia,serif;font-size:26px}
-  .price small{font-family:"Manrope",sans-serif;font-size:13px;color:var(--muted)}
-  /* video strip */
-  .strip{position:relative;padding:0;background:#354157}
-  .strip video{width:100%;height:62vh;min-height:380px;object-fit:cover;display:block}
-  .strip-cap{position:absolute;left:0;right:0;bottom:0;padding:28px 24px;color:#fff;background:linear-gradient(to top,rgba(0,0,0,.55),transparent)}
-  .strip-cap .wrap{padding:0}
-  .strip-cap h3{font-size:clamp(26px,4vw,40px)}
-  /* restaurant + experiences */
-  .split{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
-  .split img{width:100%;height:440px;object-fit:cover}
-  .split h2{font-size:clamp(32px,4.5vw,48px);margin:14px 0 12px}
-  .split p{color:var(--muted)}
-  .hours{margin-top:22px;border-top:1px solid var(--line)}
-  .hours div{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px}
-  .hours span:first-child{color:var(--muted)}
-  .exp{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
-  .exp article{background:var(--white);border:1px solid var(--line);overflow:hidden}
-  .exp img{width:100%;height:230px;object-fit:cover}
-  .exp div{padding:22px 22px 26px}
-  .exp h3{font-size:26px;margin-bottom:6px}
-  .exp p{color:var(--muted);font-size:15px}
-  /* gallery */
-  .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-  .gallery img{width:100%;height:230px;object-fit:cover}
-  .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}
-  .trio img{width:100%;height:220px;object-fit:cover}
-  /* booking */
-  .book{background:var(--ink);color:#fff}
-  .book h2{font-size:clamp(32px,4.5vw,48px);margin:14px 0 12px}
-  .book p{color:rgba(255,255,255,.75)}
-  .book .eyebrow{color:var(--sand)}
-  form{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px}
-  label{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.7);display:block;margin-bottom:6px}
-  input,select{width:100%;padding:14px;border:1px solid rgba(255,255,255,.25);background:transparent;color:#fff;font:inherit;font-size:15px}
-  input::-webkit-calendar-picker-indicator{filter:invert(1)}
-  select option{color:#222}
-  form .full{grid-column:1 / -1}
-  .note{font-size:14px;color:rgba(255,255,255,.6);margin-top:16px}
-  footer{padding:56px 0;border-top:1px solid var(--line)}
-  .foot{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap}
-  .foot .brand{font-size:26px}
-  .foot p{color:var(--muted);font-size:14px;max-width:340px}
-  .foot small{display:block;margin-top:28px;color:var(--muted);font-size:13px}
-  @media (max-width:768px){
-    nav{display:none;position:absolute;top:64px;left:0;right:0;background:var(--bg);flex-direction:column;align-items:flex-start;padding:20px 24px;border-bottom:1px solid var(--line);gap:18px}
-    nav.open{display:flex}
-    #menu-btn{display:block}
-    section{padding:64px 0}
-    .intro,.split{grid-template-columns:1fr;gap:28px}
-    .rooms{grid-template-columns:1fr}
-    .room img{height:240px}
-    .split img{height:300px}
-    .exp{grid-template-columns:1fr}
-    .gallery{grid-template-columns:1fr 1fr}
-    .trio{grid-template-columns:1fr}
-    .gallery img{height:170px}
-    form{grid-template-columns:1fr}
-    .hero-cta .btn{width:100%;text-align:center}
-  }
+:root{--bg:#faf7f2;--ink:#1c2430;--muted:#5c6673;--sea:#1e6f7a;--sand:#c9b490;--line:#e7e0d3;--card:#fffdf9;--dark:#16233a}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Manrope",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:"Cormorant Garamond",serif;font-weight:500;line-height:1.15}
+a{color:inherit;text-decoration:none}
+img{display:block;width:100%;height:100%;object-fit:cover}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+.eyebrow{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--sand);font-weight:700}
+.sec{padding:84px 0}
+.sec-head{max-width:640px;margin-bottom:38px}
+.sec-head h2{font-size:clamp(32px,4.5vw,48px);margin:12px 0 10px}
+.sec-head p{color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--dark);color:#fff;border:1px solid var(--dark);padding:14px 26px;border-radius:999px;font-size:14px;font-weight:700;letter-spacing:.04em;cursor:pointer}
+.btn:hover{opacity:.9}
+.btn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.7)}
+.btn.light{background:#fff;color:var(--dark);border-color:#fff}
+.btn.small{padding:10px 18px;font-size:13px}
+.btn:disabled{opacity:.45;cursor:default}
+header{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(250,247,242,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{font-family:"Cormorant Garamond",serif;font-size:26px;letter-spacing:.34em;font-weight:600;cursor:pointer}
+.nav-links{display:flex;gap:26px;align-items:center;font-size:13px;font-weight:600;letter-spacing:.06em}
+.nav-links a:hover{color:var(--sea)}
+.burger{display:none;background:none;border:0;font-size:26px;cursor:pointer;color:var(--ink)}
+@media(max-width:820px){.nav-links{display:none;position:absolute;top:64px;left:0;right:0;background:var(--bg);flex-direction:column;padding:18px 22px 24px;border-bottom:1px solid var(--line);align-items:flex-start}.nav-links.open{display:flex}.burger{display:block}}
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;color:#fff;background:#1e3853}
+.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,18,32,.72) 0%,rgba(10,18,32,.08) 55%,rgba(10,18,32,.15) 100%)}
+.hero-inner{position:relative;z-index:2;padding-bottom:56px;width:100%}
+.hero-inner h1{font-size:clamp(56px,11vw,110px);letter-spacing:.34em;margin-bottom:20px}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.intro{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:start}
+.intro h2{font-size:clamp(30px,4vw,44px);margin:12px 0 14px}
+.intro p{color:var(--muted)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.stat{border-top:1px solid var(--line);padding-top:14px}
+.stat b{font-family:"Cormorant Garamond",serif;font-size:34px;font-weight:500;display:block}
+.stat span{font-size:13px;color:var(--muted)}
+.hotel{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.hotel img{height:100%;min-height:340px}
+.hotel-txt{padding:44px}
+.hotel-txt h2{font-size:clamp(28px,3.5vw,40px);margin:12px 0 12px}
+.hotel-txt p{color:var(--muted)}
+@media(max-width:820px){.intro,.hotel{grid-template-columns:1fr}.hotel img{min-height:240px}.sec{padding:56px 0}}
+.room-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media(max-width:900px){.room-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.room-grid{grid-template-columns:1fr}}
+.room-card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;cursor:pointer}
+.room-card .ph{aspect-ratio:4/3;overflow:hidden}
+.room-card:hover .ph img{transform:scale(1.03);transition:transform .6s}
+.room-card .bd{padding:20px}
+.room-card h3{font-size:26px;margin-bottom:4px}
+.room-card .meta{font-size:13px;color:var(--muted)}
+.room-card .price{font-size:20px;font-weight:700;margin-top:10px}
+.room-card .price small{font-size:13px;color:var(--muted);font-weight:500}
+.room-card .actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.tag{display:inline-block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;padding:5px 10px;border-radius:999px;background:#eef3f1;color:var(--sea)}
+.tag.warn{background:#fdf0e9;color:#9a4a1f}
+.tag.ok{background:#e9f4e9;color:#2e6b34}
+.strip{position:relative;height:62vh;min-height:340px;overflow:hidden;background:#354157}
+.strip video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.trio .ph{aspect-ratio:4/3;border-radius:14px;overflow:hidden}
+.trio p{font-size:13px;color:var(--muted);margin-top:10px}
+@media(max-width:700px){.trio{grid-template-columns:1fr}}
+.spaces{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.spaces .ph{aspect-ratio:1/1;border-radius:14px;overflow:hidden}
+.spaces p{font-size:13px;color:var(--muted);margin-top:8px;font-weight:600}
+@media(max-width:900px){.spaces{grid-template-columns:repeat(2,1fr)}}
+.exp{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.exp .ph{aspect-ratio:4/3;border-radius:14px;overflow:hidden}
+.exp h3{font-size:24px;margin-top:12px}
+.exp p{font-size:13px;color:var(--muted)}
+@media(max-width:700px){.exp{grid-template-columns:1fr}}
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.gallery .ph{aspect-ratio:1/1;border-radius:12px;overflow:hidden}
+@media(max-width:900px){.gallery{grid-template-columns:repeat(2,1fr)}}
+.cta{background:var(--dark);color:#fff;border-radius:18px;padding:48px;text-align:center}
+.cta h2{font-size:clamp(28px,4vw,42px);margin-bottom:10px}
+.cta p{color:rgba(255,255,255,.75);margin-bottom:22px}
+footer{border-top:1px solid var(--line);padding:44px 0 28px;margin-top:20px}
+.foot{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.foot h3{font-size:26px;letter-spacing:.2em}
+.foot p,.foot a{font-size:13px;color:var(--muted)}
+.foot nav{display:flex;flex-direction:column;gap:6px}
+.foot nav a:hover{color:var(--sea)}
+.copy{margin-top:28px;font-size:12px;color:var(--muted)}
+.view{display:none;padding-top:64px}
+#view-inicio{padding-top:0}
+.view.active{display:block}
+.view .sec{padding-top:56px}
+.detail{display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:start}
+@media(max-width:860px){.detail{grid-template-columns:1fr}}
+.gal-main{aspect-ratio:4/3;border-radius:16px;overflow:hidden;background:#101d33}
+.gal-main img{object-fit:contain;background:#101d33}
+.gal-thumbs{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
+.gal-thumbs img{width:84px;height:64px;object-fit:cover;border-radius:8px;cursor:pointer;border:2px solid transparent}
+.gal-thumbs img.sel{border-color:var(--sea)}
+.amen{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+.amen span{font-size:13px;border:1px solid var(--line);border-radius:999px;padding:6px 12px;background:var(--card)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.form{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px}
+.form label{display:block;font-size:13px;font-weight:700;margin:14px 0 6px}
+.form input,.form select,.form textarea{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff}
+.form textarea{min-height:90px;resize:vertical}
+.sum{background:#f4efe6;border-radius:12px;padding:18px;margin-top:18px;font-size:15px}
+.sum b{float:right}
+.note{font-size:13px;color:var(--muted);margin-top:12px}
+.policy{background:#f4efe6;border-radius:16px;padding:26px}
+.policy h3{font-size:26px;margin-bottom:10px}
+.policy li{margin:6px 0 6px 18px;font-size:14px;color:var(--muted)}
+.receipt{background:#fff;border:1px dashed var(--sand);border-radius:14px;padding:22px}
+.receipt h3{font-size:24px;letter-spacing:.08em}
+.receipt .row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #f0e9db;font-size:14px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.tabs button{padding:10px 18px;border-radius:999px;border:1px solid var(--line);background:var(--card);cursor:pointer;font:inherit;font-size:13px;font-weight:700}
+.tabs button.on{background:var(--dark);color:#fff;border-color:var(--dark)}
+.admin-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:14px}
+.admin-card .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.admin-card input,.admin-card select,.admin-card textarea{padding:10px 12px;border:1px solid var(--line);border-radius:8px;font:inherit;flex:1;min-width:140px;background:#fff}
+.thumb{width:72px;height:54px;object-fit:cover;border-radius:8px}
+#chat-fab{position:fixed;right:20px;bottom:20px;z-index:90;width:58px;height:58px;border-radius:50%;background:var(--dark);border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px rgba(0,0,0,.28)}
+#chat-fab svg{width:26px;height:26px;fill:#fff}
+.chat-screen{position:fixed;inset:0;z-index:100;background:var(--bg);display:none;flex-direction:column}
+.chat-screen.open{display:flex}
+.chat-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line);background:var(--bg)}
+.chat-head b{font-family:"Cormorant Garamond",serif;font-size:24px;letter-spacing:.28em}
+.chat-head button{margin-left:auto;background:none;border:0;font-size:26px;cursor:pointer}
+.chat-msgs{flex:1;overflow:auto;padding:18px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:78%;padding:11px 14px;border-radius:16px;font-size:15px}
+.msg.me{align-self:flex-end;background:#20344f;color:#fff;border-bottom-right-radius:4px}
+.msg.hotel{align-self:flex-start;background:#e9e4da;border-bottom-left-radius:4px}
+.msg small{display:block;font-size:11px;opacity:.7;margin-top:4px}
+.chat-input{display:flex;gap:8px;padding:14px;border-top:1px solid var(--line);background:var(--bg)}
+.chat-input input{flex:1;padding:13px 14px;border:1px solid var(--line);border-radius:999px;font:inherit}
+.chat-input button{border:0;background:var(--dark);color:#fff;border-radius:50%;width:48px;height:48px;cursor:pointer;font-size:18px;flex-shrink:0}
+.chat-input label{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;flex-shrink:0;background:#fff}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:120;background:var(--dark);color:#fff;padding:13px 22px;border-radius:999px;font-size:14px;display:none}
+.toast.show{display:block}
 </style>
 </head>
 <body>
 <header>
-  <div class="wrap head">
-    <a class="brand" href="#inicio">AZUL</a>
-    <nav id="main-nav">
-      <a href="#hotel">O hotel</a>
-      <a href="#quartos">Quartos</a>
-      <a href="#restaurante">Restaurante</a>
-      <a href="#espacos">Espaços</a>
-      <a href="#experiencias">Experiências</a>
-      <a href="#galeria">Galeria</a>
-      <a href="#reservar" class="btn" style="color:#fff">Reservar</a>
+  <div class="wrap nav">
+    <div class="brand" onclick="go('inicio')">AZUL</div>
+    <nav class="nav-links" id="nav-links">
+      <a href="#" onclick="goAnchor('inicio','hotel');return false">O hotel</a>
+      <a href="#" onclick="go('quartos');return false">Quartos</a>
+      <a href="#" onclick="go('disponibilidade');return false">Disponibilidade</a>
+      <a href="#" onclick="goAnchor('inicio','restaurante');return false">Restaurante</a>
+      <a href="#" onclick="goAnchor('inicio','experiencias');return false">Experiências</a>
+      <a href="#" onclick="goAnchor('inicio','galeria');return false">Galeria</a>
+      <a href="#" onclick="go('conta');return false" id="nav-conta">Conta</a>
+      <a href="#" class="btn small" onclick="go('reservar');return false">Reservar</a>
     </nav>
-    <button id="menu-btn" type="button" aria-label="Menu">☰</button>
+    <button class="burger" onclick="document.getElementById('nav-links').classList.toggle('open')">☰</button>
   </div>
 </header>
 
-<section class="hero" id="inicio" style="padding:0">
-  <video id="hero-video" autoplay muted loop playsinline preload="auto">
-    <source src="videos/hero.mp4" type="video/mp4">
-  </video>
-  <div class="hero-inner">
-    <h1>AZUL</h1>
-    <div class="hero-cta">
-      <a class="btn" href="#reservar">Reservar estadia</a>
-      <a class="btn light" href="#quartos">Ver quartos</a>
+<!-- INÍCIO -->
+<section class="view active" id="view-inicio">
+  <div class="hero">
+    <video id="hero-video" autoplay muted loop playsinline preload="auto">
+      <source src="videos/hero.mp4" type="video/mp4">
+    </video>
+    <div class="wrap hero-inner">
+      <h1>AZUL</h1>
+      <div class="hero-cta">
+        <button class="btn" onclick="go('reservar')">Reservar estadia</button>
+        <button class="btn ghost" onclick="go('quartos')">Ver quartos</button>
+      </div>
     </div>
   </div>
-</section>
-
-<section>
-  <div class="wrap intro">
-    <div>
-      <p class="eyebrow">Bem-vindo ao Azul</p>
-      <h2>Pensado para descansar de verdade.</h2>
-    </div>
-    <div>
-      <p>Nada de corredores compridos nem multidões. No Azul, cada quarto abre para o jardim ou para o mar, o pequeno-almoço chega sem pressa e a piscina fica virada ao Índico o dia inteiro.</p>
+  <div class="wrap">
+    <div class="sec intro">
+      <div>
+        <p class="eyebrow">Hotel</p>
+        <h2>Pensado para descansar de verdade.</h2>
+        <p id="intro-text">Entre o jardim e o mar, com luz, silêncio e tempo. Quartos calmos, piscina infinita, restaurante e pátios para estar, sem pressa.</p>
+      </div>
       <div class="stats">
-        <div><b>12</b><span>Quartos</span></div>
-        <div><b>1</b><span>Piscina infinita</span></div>
-        <div><b>7h–22h</b><span>Restaurante</span></div>
+        <div class="stat"><b>111</b><span>Quartos</span></div>
+        <div class="stat"><b>6</b><span>Tipos de quarto</span></div>
+        <div class="stat"><b>7h–22h</b><span>Restaurante</span></div>
+        <div class="stat"><b>14h / 11h</b><span>Entrada / saída</span></div>
       </div>
     </div>
-  </div>
-</section>
-
-<section id="hotel" style="padding-top:0">
-  <div class="wrap split">
-    <img src="https://images.pexels.com/photos/38406370/pexels-photo-38406370.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="O hotel AZUL">
-    <div>
-      <p class="eyebrow">O hotel</p>
-      <h2>A casa, vista de fora.</h2>
-      <p>Um edifício baixo, de arcos claros e pátios abertos, com a piscina a espelhar o céu. Não há pressa aqui: chega-se, pousa-se a mala e o mar trata do resto.</p>
-      <p style="margin-top:14px;color:var(--muted)">Uma piscina infinita, um restaurante e vários pátios para estar — tudo a poucos passos uns dos outros.</p>
-    </div>
-  </div>
-</section>
-
-<section id="quartos" style="padding-top:0">
-  <div class="wrap">
-    <div class="sec-head">
-      <p class="eyebrow">Quartos</p>
-      <h2>Escolhe o teu canto.</h2>
-      <p>Todos os quartos incluem pequeno-almoço, Wi-Fi e acesso à piscina. Preços por noite.</p>
-    </div>
-    <div class="rooms">
-      <article class="room">
-        <img src="https://images.pexels.com/photos/7166559/pexels-photo-7166559.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Quarto Jardim">
-        <div class="room-body">
-          <h3>Quarto Jardim</h3>
-          <p class="room-meta">2 hóspedes · 28 m² · Jardim privado</p>
-          <p>Luz suave, cortinas azuis e uma porta directa para o jardim. O quarto mais calmo da casa.</p>
-          <div class="room-foot">
-            <p class="price">8.500 MT <small>/ noite</small></p>
-            <a class="btn" href="#reservar" data-room="Quarto Jardim">Reservar</a>
-          </div>
+    <div class="sec" id="hotel" style="padding-top:0">
+      <div class="hotel">
+        <img src="https://images.pexels.com/photos/38406370/pexels-photo-38406370.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="O hotel">
+        <div class="hotel-txt">
+          <p class="eyebrow">O hotel</p>
+          <h2>Uma casa aberta ao mar.</h2>
+          <p id="hotel-text">Arcos, pátios e uma piscina que parece continuar no horizonte. O edifício foi pensado para se viver devagar: luz natural, materiais simples e silêncio.</p>
+          <div style="margin-top:22px"><button class="btn small" onclick="go('quartos')">Ver os quartos</button></div>
         </div>
-      </article>
-      <article class="room">
-        <img src="https://images.pexels.com/photos/7746093/pexels-photo-7746093.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Quarto Grafite">
-        <div class="room-body">
-          <h3>Quarto Grafite</h3>
-          <p class="room-meta">2 hóspedes · 30 m² · Pátio interior</p>
-          <p>Cinzento suave, geometria calma e cama larga. Para quem gosta de quartos serenos.</p>
-          <div class="room-foot">
-            <p class="price">10.500 MT <small>/ noite</small></p>
-            <a class="btn" href="#reservar" data-room="Quarto Grafite">Reservar</a>
-          </div>
-        </div>
-      </article>
-      <article class="room">
-        <img src="https://images.pexels.com/photos/28347475/pexels-photo-28347475.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Quarto Mar">
-        <div class="room-body">
-          <h3>Quarto Mar</h3>
-          <p class="room-meta">2 hóspedes · 34 m² · Vista mar</p>
-          <p>Madeira quente, cama larga e a primeira coisa que vês ao acordar é o Índico.</p>
-          <div class="room-foot">
-            <p class="price">12.500 MT <small>/ noite</small></p>
-            <a class="btn" href="#reservar" data-room="Quarto Mar">Reservar</a>
-          </div>
-        </div>
-      </article>
-      <article class="room">
-        <img src="https://images.pexels.com/photos/6394581/pexels-photo-6394581.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Quarto Rosa">
-        <div class="room-body">
-          <h3>Quarto Rosa</h3>
-          <p class="room-meta">2 hóspedes · 36 m² · Varanda</p>
-          <p>Veludo rosa, lustre e uma cabeceira que parece rendada. O quarto mais romântico da casa.</p>
-          <div class="room-foot">
-            <p class="price">15.500 MT <small>/ noite</small></p>
-            <a class="btn" href="#reservar" data-room="Quarto Rosa">Reservar</a>
-          </div>
-        </div>
-      </article>
-      <article class="room">
-        <img src="https://images.pexels.com/photos/6782567/pexels-photo-6782567.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Suite Azul">
-        <div class="room-body">
-          <h3>Suite Azul</h3>
-          <p class="room-meta">3 hóspedes · 48 m² · Varanda</p>
-          <p>Tons claros, cama king e varanda para o fim da tarde. A preferida dos casais.</p>
-          <div class="room-foot">
-            <p class="price">18.500 MT <small>/ noite</small></p>
-            <a class="btn" href="#reservar" data-room="Suite Azul">Reservar</a>
-          </div>
-        </div>
-      </article>
-      <article class="room">
-        <img src="https://images.pexels.com/photos/6434586/pexels-photo-6434586.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Suite Família">
-        <div class="room-body">
-          <h3>Suite Família</h3>
-          <p class="room-meta">4 hóspedes · 62 m² · Sala de estar</p>
-          <p>A maior da casa: quarto, sala e espaço para a família inteira, sem perder a calma.</p>
-          <div class="room-foot">
-            <p class="price">24.500 MT <small>/ noite</small></p>
-            <a class="btn" href="#reservar" data-room="Suite Família">Reservar</a>
-          </div>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="strip">
-  <video autoplay muted loop playsinline preload="metadata" poster="https://images.pexels.com/photos/4025955/pexels-photo-4025955.jpeg?auto=compress&cs=tinysrgb&w=1600">
-    <source src="https://videos.pexels.com/video-files/9531187/9531187-hd_1280_720_30fps.mp4" type="video/mp4">
-  </video>
-  <div class="strip-cap"><div class="wrap">
-    <p class="eyebrow" style="color:#d8e9ec">A piscina</p>
-    <h3>Infinita, virada ao Índico.</h3>
-  </div></div>
-</section>
-
-<section id="restaurante">
-  <div class="wrap split">
-    <img src="https://images.pexels.com/photos/735869/pexels-photo-735869.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Restaurante do hotel">
-    <div>
-      <p class="eyebrow">Restaurante</p>
-      <h2>Cozinha do Índico, sem pressa.</h2>
-      <p>Peixe grelhado, camarão, arroz de coco e o pequeno-almoço incluído em todas as estadias. À noite, o terraço fica só com o som do mar.</p>
-      <div class="hours">
-        <div><span>Pequeno-almoço</span><span>7h – 10h30</span></div>
-        <div><span>Almoço</span><span>12h – 15h</span></div>
-        <div><span>Jantar</span><span>18h30 – 22h</span></div>
       </div>
     </div>
+    <div class="sec" style="padding-top:0">
+      <div class="sec-head"><p class="eyebrow">Quartos</p><h2>Escolhe o teu ritmo.</h2><p>Do jardim ao mar, do quarto de casal à suite de família. Os preços e todos os detalhes estão na página de quartos.</p></div>
+      <div class="room-grid" id="home-rooms"></div>
+      <div style="margin-top:24px"><button class="btn" onclick="go('quartos')">Ver todos os quartos e preços</button></div>
+    </div>
   </div>
+  <div class="strip"><video autoplay muted loop playsinline preload="auto" poster="https://images.pexels.com/photos/4025955/pexels-photo-4025955.jpeg?auto=compress&cs=tinysrgb&w=1200"><source src="https://videos.pexels.com/video-files/9531187/9531187-hd_1280_720_30fps.mp4" type="video/mp4"></video></div>
   <div class="wrap">
-    <div class="trio">
-      <img src="https://images.pexels.com/photos/20184687/pexels-photo-20184687.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Salão do restaurante">
-      <img src="https://images.pexels.com/photos/12991640/pexels-photo-12991640.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Esplanada do restaurante">
-      <img src="https://images.pexels.com/photos/33144643/pexels-photo-33144643.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Mesa do restaurante">
-      <img src="https://images.pexels.com/photos/38406370/pexels-photo-38406370.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="O hotel ao fim do dia">
-      <img src="https://images.pexels.com/photos/14036253/pexels-photo-14036253.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Recepção">
-      <img src="https://images.pexels.com/photos/2036343/pexels-photo-2036343.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Terraço ao entardecer">
-      <img src="https://images.pexels.com/photos/8484851/pexels-photo-8484851.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Pátio da casa">
+    <div class="sec" id="restaurante">
+      <div class="sec-head"><p class="eyebrow">Restaurante</p><h2>Comer devagar, com vista.</h2><p>Pequeno-almoço 7h–10h30 · Almoço 12h–15h · Jantar 18h30–22h.</p></div>
+      <div class="trio">
+        <div><div class="ph"><img src="https://images.pexels.com/photos/20184687/pexels-photo-20184687.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Salão"></div><p>Salão claro, mesas largas, serviço calmo.</p></div>
+        <div><div class="ph"><img src="https://images.pexels.com/photos/12991640/pexels-photo-12991640.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Esplanada"></div><p>Esplanada virada ao jardim e à piscina.</p></div>
+        <div><div class="ph"><img src="https://images.pexels.com/photos/33144643/pexels-photo-33144643.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Mesa"></div><p>Cozinha simples, produto fresco, sem pressa.</p></div>
+      </div>
+    </div>
+    <div class="sec" id="espacos" style="padding-top:0">
+      <div class="sec-head"><p class="eyebrow">Espaços</p><h2>Lugares para estar.</h2></div>
+      <div class="spaces">
+        <div><div class="ph"><img src="https://images.pexels.com/photos/14036253/pexels-photo-14036253.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Recepção"></div><p>Recepção</p></div>
+        <div><div class="ph"><img src="https://images.pexels.com/photos/7821342/pexels-photo-7821342.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Sala de estar"></div><p>Sala de estar</p></div>
+        <div><div class="ph"><img src="https://images.pexels.com/photos/2036343/pexels-photo-2036343.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Terraço"></div><p>Terraço</p></div>
+        <div><div class="ph"><img src="https://images.pexels.com/photos/8484851/pexels-photo-8484851.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Pátio"></div><p>Pátio</p></div>
+      </div>
+    </div>
+    <div class="sec" id="experiencias" style="padding-top:0">
+      <div class="sec-head"><p class="eyebrow">Experiências</p><h2>A costa, devagar.</h2></div>
+      <div class="exp">
+        <div><div class="ph"><img src="https://images.pexels.com/photos/14013218/pexels-photo-14013218.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Passeio de barco"></div><h3>Passeio de barco</h3><p>Manhãs no mar, com paragem para nadar.</p></div>
+        <div><div class="ph"><img src="https://images.pexels.com/photos/7955122/pexels-photo-7955122.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Praia"></div><h3>Praia</h3><p>Areia, sombra e água calma a poucos minutos.</p></div>
+        <div><div class="ph"><img src="https://images.pexels.com/photos/5326951/pexels-photo-5326951.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Pôr do sol"></div><h3>Pôr do sol</h3><p>O fim do dia visto da piscina infinita.</p></div>
+      </div>
+    </div>
+    <div class="sec" id="galeria" style="padding-top:0">
+      <div class="sec-head"><p class="eyebrow">Galeria</p><h2>O hotel em imagens.</h2></div>
+      <div class="gallery">
+        <div class="ph"><img src="https://images.pexels.com/photos/4025955/pexels-photo-4025955.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Piscina"></div>
+        <div class="ph"><img src="https://images.pexels.com/photos/14021097/pexels-photo-14021097.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Vista aérea"></div>
+        <div class="ph"><img src="https://images.pexels.com/photos/5326951/pexels-photo-5326951.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Pôr do sol"></div>
+        <div class="ph"><img src="https://images.pexels.com/photos/33144643/pexels-photo-33144643.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Mesa"></div>
+        <div class="ph"><img src="https://images.pexels.com/photos/38406370/pexels-photo-38406370.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Edifício"></div>
+        <div class="ph"><img src="https://images.pexels.com/photos/14036253/pexels-photo-14036253.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Recepção"></div>
+        <div class="ph"><img src="https://images.pexels.com/photos/2036343/pexels-photo-2036343.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Terraço"></div>
+        <div class="ph"><img src="https://images.pexels.com/photos/8484851/pexels-photo-8484851.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Pátio"></div>
+      </div>
+    </div>
+    <div class="sec" style="padding-top:0">
+      <div class="cta">
+        <h2>Pronto para ficar?</h2>
+        <p>Vê a disponibilidade, escolhe o quarto e reserva com conta. A entrada é metade do valor e conta para o pagamento final.</p>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+          <button class="btn light" onclick="go('disponibilidade')">Ver disponibilidade</button>
+          <button class="btn ghost" onclick="go('reservar')">Reservar</button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="espacos" style="padding-top:0">
-  <div class="wrap">
-    <div class="sec-head">
-      <p class="eyebrow">Espaços</p>
-      <h2>Mais do que quartos.</h2>
-    </div>
-    <div class="exp">
-      <article>
-        <img src="https://images.pexels.com/photos/14036253/pexels-photo-14036253.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Recepção">
-        <div><h3>Recepção</h3><p>A entrada da casa: luz, mármore e plantas, com a equipa sempre por perto.</p></div>
-      </article>
-      <article>
-        <img src="https://images.pexels.com/photos/7821342/pexels-photo-7821342.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Sala de estar">
-        <div><h3>Sala de estar</h3><p>Poltronas, luz quente e silêncio para ler ou conversar ao fim do dia.</p></div>
-      </article>
-      <article>
-        <img src="https://images.pexels.com/photos/2036343/pexels-photo-2036343.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Terraço">
-        <div><h3>Terraço</h3><p>O fim do dia ao ar livre, com sofás, lanternas e o céu a mudar de cor.</p></div>
-      </article>
-      <article>
-        <img src="https://images.pexels.com/photos/8484851/pexels-photo-8484851.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Pátio">
-        <div><h3>Pátio</h3><p>Pátios de pedra clara e uma piscina calma entre os edifícios da casa.</p></div>
-      </article>
+<!-- QUARTOS -->
+<section class="view" id="view-quartos"><div class="wrap">
+  <div class="sec">
+    <div class="sec-head"><p class="eyebrow">Quartos</p><h2>111 quartos, 6 tipos.</h2><p>Preços por noite, com pequeno-almoço incluído. Toca num quarto para ver todas as fotos, o que tem e a disponibilidade.</p></div>
+    <div class="room-grid" id="rooms-page"></div>
+    <div class="policy" style="margin-top:44px">
+      <h3>Entrada e reembolsos</h3>
+      <p style="font-size:14px;color:var(--muted)">A reserva confirma-se com uma entrada de <b style="color:var(--ink)">metade do valor total</b>. Essa entrada conta para o pagamento final, pago no hotel. O resto paga-se na chegada.</p>
+      <ul>
+        <li><b>7 ou mais dias antes da entrada:</b> a entrada é devolvida na totalidade.</li>
+        <li><b>De 3 a 6 dias antes da entrada:</b> é devolvida metade da entrada.</li>
+        <li><b>Menos de 3 dias antes, ou se não apareceres na data sem aviso:</b> a entrada não é devolvida.</li>
+        <li>Se o hotel cancelar, a entrada é sempre devolvida na totalidade.</li>
+      </ul>
+      <p class="note">Estas regras podem ser ajustadas no painel de administração, em Definições.</p>
     </div>
   </div>
-</section>
+</div></section>
 
-<section id="experiencias" style="padding-top:0">
-  <div class="wrap">
-    <div class="sec-head">
-      <p class="eyebrow">Experiências</p>
-      <h2>A costa, devagar.</h2>
-    </div>
-    <div class="exp">
-      <article>
-        <img src="https://images.pexels.com/photos/14013218/pexels-photo-14013218.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Passeio de barco">
-        <div><h3>Passeio de barco</h3><p>Inhaca e os bancos de areia, com saída de manhã e regresso ao pôr do sol.</p></div>
-      </article>
-      <article>
-        <img src="https://images.pexels.com/photos/7955122/pexels-photo-7955122.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Praia e palmeiras">
-        <div><h3>Praia e palmeiras</h3><p>Manhãs na areia, mar calmo e sombra de palmeira a dois passos do quarto.</p></div>
-      </article>
-      <article>
-        <img src="https://images.pexels.com/photos/5326951/pexels-photo-5326951.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Pôr do sol na baía">
-        <div><h3>Pôr do sol na baía</h3><p>O fim do dia visto do terraço, com a baía à frente.</p></div>
-      </article>
-    </div>
-  </div>
-</section>
+<!-- DETALHE DO QUARTO -->
+<section class="view" id="view-quarto"><div class="wrap"><div class="sec" id="room-detail"></div></div></section>
 
-<section id="galeria" style="padding-top:0">
-  <div class="wrap">
-    <div class="sec-head">
-      <p class="eyebrow">Galeria</p>
-      <h2>A casa, em imagens.</h2>
+<!-- DISPONIBILIDADE -->
+<section class="view" id="view-disponibilidade"><div class="wrap">
+  <div class="sec">
+    <div class="sec-head"><p class="eyebrow">Disponibilidade</p><h2>Quartos livres nas tuas datas.</h2><p>Escolhe a entrada e a saída. A disponibilidade muda todos os dias, à medida que as reservas entram — só aparecem os quartos ainda livres.</p></div>
+    <div class="form" style="max-width:720px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div><label>Entrada</label><input type="date" id="av-in"></div>
+        <div><label>Saída</label><input type="date" id="av-out"></div>
+      </div>
+      <button class="btn" style="margin-top:18px" onclick="checkAvailability()">Ver disponibilidade</button>
+      <p class="note">Podes reservar até um ano antes da data. Estadias longas, de um mês ou mais, são bem-vindas.</p>
     </div>
-    <div class="gallery">
-      <img src="https://images.pexels.com/photos/4025955/pexels-photo-4025955.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Piscina e praia">
-      <img src="https://images.pexels.com/photos/14021097/pexels-photo-14021097.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Vista aérea do hotel">
-      <img src="https://images.pexels.com/photos/5326951/pexels-photo-5326951.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Baía vista de cima">
-      <img src="https://images.pexels.com/photos/33144643/pexels-photo-33144643.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Mesa do restaurante">
-    </div>
+    <div id="avail-results" style="margin-top:30px"></div>
   </div>
-</section>
+</div></section>
 
-<section class="book" id="reservar">
-  <div class="wrap">
-    <p class="eyebrow">Reservas</p>
-    <h2>Reserva a tua estadia.</h2>
-    <p>Preenche e envia: o pedido segue para o WhatsApp do hotel e a equipa confirma a disponibilidade. Check-in às 14h, check-out às 11h.</p>
-    <form id="book-form">
-      <div>
-        <label for="bk-name">Nome</label>
-        <input type="text" id="bk-name" placeholder="O teu nome" required>
-      </div>
-      <div>
-        <label for="bk-room">Quarto</label>
-        <select id="bk-room">
-          <option>Quarto Jardim</option>
-          <option>Quarto Grafite</option>
-          <option>Quarto Mar</option>
-          <option>Quarto Rosa</option>
-          <option>Suite Azul</option>
-          <option>Suite Família</option>
-        </select>
-      </div>
-      <div>
-        <label for="bk-in">Entrada</label>
-        <input type="date" id="bk-in" required>
-      </div>
-      <div>
-        <label for="bk-out">Saída</label>
-        <input type="date" id="bk-out" required>
-      </div>
-      <div>
-        <label for="bk-guests">Hóspedes</label>
-        <select id="bk-guests">
-          <option>1 hóspede</option>
-          <option selected>2 hóspedes</option>
-          <option>3 hóspedes</option>
-          <option>4 hóspedes</option>
-        </select>
-      </div>
-      <div>
-        <label for="bk-note">Pedido especial (opcional)</label>
-        <input type="text" id="bk-note" placeholder="Ex.: cama extra, aniversário">
-      </div>
-      <div class="full">
-        <button class="btn" type="submit" style="background:var(--sand);color:var(--ink);width:100%">Pedir reserva no WhatsApp</button>
-      </div>
-    </form>
-    <p class="note">Nesta versão, a reserva é confirmada pela equipa no WhatsApp. O pagamento é combinado na confirmação.</p>
+<!-- RESERVAR -->
+<section class="view" id="view-reservar"><div class="wrap">
+  <div class="sec" style="max-width:760px;margin:0 auto">
+    <div class="sec-head"><p class="eyebrow">Reservar</p><h2>A tua estadia.</h2><p>Reserva só depois de iniciares sessão, para o histórico ficar guardado na tua conta.</p></div>
+    <div id="booking-area"></div>
   </div>
-</section>
+</div></section>
+
+<!-- PAGAMENTO -->
+<section class="view" id="view-pagamento"><div class="wrap">
+  <div class="sec" style="max-width:760px;margin:0 auto" id="pay-box"></div>
+</div></section>
+
+<!-- CONTA -->
+<section class="view" id="view-conta"><div class="wrap">
+  <div class="sec" style="max-width:760px;margin:0 auto" id="conta-box"></div>
+</div></section>
+
+<!-- ADMIN -->
+<section class="view" id="view-admin"><div class="wrap">
+  <div class="sec" id="admin-box"></div>
+</div></section>
 
 <footer>
-  <div class="wrap foot">
-    <div>
-      <a class="brand" href="#inicio">AZUL</a>
-      <p>Com piscina infinita, restaurante e pátios para estar.</p>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <h3>AZUL</h3>
+        <p style="margin-top:8px">Localização — Polana, Maputo</p>
+        <p>Entrada 14h · Saída 11h</p>
+      </div>
+      <nav>
+        <a href="#" onclick="go('quartos');return false">Quartos</a>
+        <a href="#" onclick="go('disponibilidade');return false">Disponibilidade</a>
+        <a href="#" onclick="go('reservar');return false">Reservar</a>
+        <a href="#" onclick="go('conta');return false">A minha conta</a>
+      </nav>
+      <nav>
+        <a href="#" onclick="goAnchor('inicio','restaurante');return false">Restaurante</a>
+        <a href="#" onclick="goAnchor('inicio','experiencias');return false">Experiências</a>
+        <a href="#" onclick="goAnchor('inicio','galeria');return false">Galeria</a>
+        <a href="#" onclick="go('quartos');window.scrollTo(0,document.body.scrollHeight);return false">Reembolsos</a>
+      </nav>
     </div>
-    <div>
-      <p><b>Localização</b><br>Polana, Maputo</p>
-      <p style="margin-top:14px"><b>Horário</b><br>Recepção 24h · Restaurante 7h–22h</p>
-    </div>
+    <p class="copy">© 2026 AZUL · Hotel. Todos os direitos reservados.</p>
   </div>
-  <div class="wrap"><small>© <span id="year"></span> AZUL Hotel. Fotografias e vídeos de bancos de imagens livres.</small></div>
 </footer>
 
+<button id="chat-fab" onclick="openChatFab()" aria-label="Chat"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-10 10c0 2.2.7 4.2 1.9 5.9L2 22l4.3-1.8A10 10 0 1 0 12 2zm-3.5 7.5h7v1.8h-7zM8.5 11h7v1.8h-7z"/></svg></button>
+
+<div class="chat-screen" id="chat-screen">
+  <div class="chat-head">
+    <b>AZUL</b><span style="font-size:13px;color:var(--muted)">Chat do hotel</span>
+    <button onclick="closeChat()">×</button>
+  </div>
+  <div class="chat-msgs" id="chat-msgs"></div>
+  <div class="chat-input">
+    <label title="Anexar ficheiro">📎<input type="file" id="chat-file" hidden onchange="sendChatFile(this)"></label>
+    <button type="button" id="mic-btn" onclick="toggleRec()" title="Gravar áudio">🎙️</button>
+    <input id="chat-text" placeholder="Escreve a tua mensagem…" onkeydown="if(event.key==='Enter')sendChat()">
+    <button onclick="sendChat()" title="Enviar">➤</button>
+  </div>
+  <div style="padding:10px 18px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)">Preferes WhatsApp? <a href="#" onclick="openWhatsApp();return false" style="color:var(--sea);font-weight:700">Falar no WhatsApp →</a></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
 <script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-  var hv = document.getElementById('hero-video');
-  if (hv) { var p = hv.play(); if (p) { p.catch(function(){}); } }
-  var menuBtn = document.getElementById('menu-btn');
-  var mainNav = document.getElementById('main-nav');
-  menuBtn.addEventListener('click', function(){ mainNav.classList.toggle('open'); });
-  mainNav.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click', function(){ mainNav.classList.remove('open'); });
-  });
-  document.querySelectorAll('[data-room]').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      document.getElementById('bk-room').value = btn.getAttribute('data-room');
-    });
-  });
-  document.getElementById('book-form').addEventListener('submit', function(e){
-    e.preventDefault();
-    var name = document.getElementById('bk-name').value.trim();
-    var room = document.getElementById('bk-room').value;
-    var din = document.getElementById('bk-in').value;
-    var dout = document.getElementById('bk-out').value;
-    var guests = document.getElementById('bk-guests').value;
-    var note = document.getElementById('bk-note').value.trim();
-    var msg = 'Olá AZUL! Quero reservar: ' + room + ' | ' + name + ' | Entrada: ' + din + ' | Saída: ' + dout + ' | ' + guests + (note ? ' | ' + note : '');
-    window.open('https://wa.me/258840000000?text=' + encodeURIComponent(msg), '_blank');
-  });
+const px = id => "https://images.pexels.com/photos/" + id + "/pexels-photo-" + id + ".jpeg?auto=compress&cs=tinysrgb&w=1200";
+const DEFAULT_ROOMS = [
+  {id:"jardim", name:"Quarto Jardim", price:8500, units:30, guests:2, size:28, beds:"Cama de casal", desc:"Virado ao jardim, com terraço e luz da manhã.", amenities:["Cama de casal","Varanda","Ar condicionado","Wi-Fi","TV","Casa de banho privativa","Pequeno-almoço incluído"], photos:[px(7166559),px(133920),px(7031876)]},
+  {id:"grafite", name:"Quarto Grafite", price:10500, units:18, guests:2, size:30, beds:"Duas camas", desc:"Tons escuros, madeira e calma. Ideal para dois amigos ou colegas.", amenities:["Duas camas","Ar condicionado","Wi-Fi","TV","Casa de banho privativa","Pequeno-almoço incluído"], photos:[px(7746093),px(14021932),px(19916729)]},
+  {id:"mar", name:"Quarto Mar", price:12500, units:22, guests:2, size:32, beds:"Cama de casal", desc:"Acordar com o mar à janela e o pequeno-almoço no terraço.", amenities:["Cama de casal","Vista mar","Varanda","Ar condicionado","Wi-Fi","TV","Casa de banho privativa","Pequeno-almoço incluído"], photos:[px(28347475),px(19799232),px(6775271)]},
+  {id:"rosa", name:"Quarto Rosa", price:15500, units:12, guests:2, size:36, beds:"Cama de casal", desc:"Suave e luminoso, com varanda sobre a praia.", amenities:["Cama de casal","Varanda","Ar condicionado","Wi-Fi","TV","Casa de banho privativa","Pequeno-almoço incluído"], photos:[px(6394581),px(31399459),px(7027715)]},
+  {id:"azul", name:"Suite Azul", price:18500, units:14, guests:3, size:52, beds:"Cama de casal + sala", desc:"Sala própria, quarto amplo e vista desafogada.", amenities:["Cama de casal","Sala de estar","Vista mar","Ar condicionado","Wi-Fi","TV","Casa de banho privativa","Pequeno-almoço incluído"], photos:[px(6782567),px(7174113),px(7031733)]},
+  {id:"familia", name:"Suite Família", price:24500, units:15, guests:5, size:64, beds:"Cama de casal + duas camas", desc:"Para a família toda: quarto de casal, dois lugares extra e sala.", amenities:["Cama de casal","Duas camas","Sala de estar","Ar condicionado","Wi-Fi","TV","Casa de banho privativa","Pequeno-almoço incluído"], photos:[px(6434586),px(14025033),px(5629141)]}
+];
+const DEFAULT_SETTINGS = {whatsapp:"258840000000", checkin:"14h", checkout:"11h", depositPct:50, paymentNote:""};
+const store = {
+  get(k, d){ try{ const v = JSON.parse(localStorage.getItem(k)); return v === null || v === undefined ? d : v; }catch(e){ return d; } },
+  set(k, v){ localStorage.setItem(k, JSON.stringify(v)); }
+};
+let ROOMS = store.get("azul_rooms", null) || DEFAULT_ROOMS;
+let BOOKINGS = store.get("azul_bookings", []);
+let ACCOUNTS = store.get("azul_accounts", []);
+let CHATS = store.get("azul_chats", {});
+let SETTINGS = Object.assign({}, DEFAULT_SETTINGS, store.get("azul_settings", {}));
+const saveRooms = () => store.set("azul_rooms", ROOMS);
+const saveBookings = () => store.set("azul_bookings", BOOKINGS);
+const saveAccounts = () => store.set("azul_accounts", ACCOUNTS);
+const saveChats = () => store.set("azul_chats", CHATS);
+const saveSettings = () => store.set("azul_settings", SETTINGS);
+const session = () => store.get("azul_session", null);
+const me = () => { const e = session(); return e ? ACCOUNTS.find(a => a.email === e) : null; };
+const roomById = id => ROOMS.find(r => r.id === id);
+const fmt = n => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " MT";
+const esc = s => String(s == null ? "" : s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const todayISO = () => { const d = new Date(); return d.toISOString().slice(0,10); };
+const addDaysISO = (iso, n) => { const d = new Date(iso + "T00:00:00"); d.setDate(d.getDate() + n); return d.toISOString().slice(0,10); };
+const nightsBetween = (a, b) => Math.round((new Date(b + "T00:00:00") - new Date(a + "T00:00:00")) / 86400000);
+const overlaps = (a1, a2, b1, b2) => a1 < b2 && b1 < a2;
+function freeUnits(roomId, din, dout){
+  const r = roomById(roomId); if(!r) return 0;
+  const used = BOOKINGS.filter(b => b.roomId === roomId && b.status !== "Cancelada" && overlaps(b.in, b.out, din, dout)).length;
+  return Math.max(0, r.units - used);
+}
+function toast(msg){ const t = document.getElementById("toast"); t.textContent = msg; t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 3200); }
+async function sha256(str){
+  try{
+    const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,"0")).join("");
+  }catch(e){ let h = 0; for(let i = 0; i < str.length; i++){ h = (h * 31 + str.charCodeAt(i)) >>> 0; } return "x" + h.toString(16); }
+}
+function go(route){ location.hash = "#/" + route; }
+function goAnchor(view, anchor){ go(view); setTimeout(() => { const el = document.getElementById(anchor); if(el) el.scrollIntoView({behavior:"smooth"}); }, 120); }
+function showView(id){
+  document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
+  const v = document.getElementById("view-" + id); if(v) v.classList.add("active");
+  document.getElementById("nav-links").classList.remove("open");
+  window.scrollTo(0, 0);
+  const hv = document.getElementById("hero-video"); if(hv && hv.paused) hv.play().catch(() => {});
+  const navConta = document.getElementById("nav-conta"); if(navConta) navConta.textContent = me() ? "A minha conta" : "Conta";
+}
+function render(){
+  const h = (location.hash || "#/inicio").replace(/^#\//, "");
+  const parts = h.split("/");
+  const view = parts[0] || "inicio";
+  if(view === "inicio"){ showView("inicio"); renderHomeRooms(); }
+  else if(view === "quartos"){ showView("quartos"); renderRoomsPage(); }
+  else if(view === "quarto"){ showView("quarto"); renderRoomDetail(parts[1]); }
+  else if(view === "disponibilidade"){ showView("disponibilidade"); initAvailDates(); }
+  else if(view === "reservar"){ showView("reservar"); renderBooking(parts[1] || ""); }
+  else if(view === "pagamento"){ showView("pagamento"); renderPayment(parts[1] || ""); }
+  else if(view === "conta"){ showView("conta"); renderConta(); }
+  else if(view === "admin"){ showView("admin"); renderAdmin("quartos"); }
+  else { showView("inicio"); renderHomeRooms(); }
+}
+window.addEventListener("hashchange", render);
+function renderHomeRooms(){
+  document.getElementById("home-rooms").innerHTML = ROOMS.map(r =>
+    '<div class="room-card" onclick="go(\'quarto/' + r.id + '\')">' +
+    '<div class="ph"><img src="' + r.photos[0] + '" alt="' + esc(r.name) + '"></div>' +
+    '<div class="bd"><h3>' + esc(r.name) + '</h3>' +
+    '<div class="meta">' + esc(r.beds) + ' · até ' + r.guests + ' hóspedes · ' + r.size + ' m² · ' + r.units + ' unidades</div>' +
+    '<div class="actions"><button class="btn small" onclick="event.stopPropagation();go(\'quarto/' + r.id + '\')">Ver detalhes</button></div></div></div>'
+  ).join("");
+}
+function renderRoomsPage(){
+  document.getElementById("rooms-page").innerHTML = ROOMS.map(r =>
+    '<div class="room-card" onclick="go(\'quarto/' + r.id + '\')">' +
+    '<div class="ph"><img src="' + r.photos[0] + '" alt="' + esc(r.name) + '"></div>' +
+    '<div class="bd"><h3>' + esc(r.name) + '</h3>' +
+    '<div class="meta">' + esc(r.beds) + ' · até ' + r.guests + ' hóspedes · ' + r.size + ' m² · ' + r.units + ' unidades</div>' +
+    '<div class="price">' + fmt(r.price) + ' <small>/ noite</small></div>' +
+    '<div class="actions"><button class="btn small" onclick="event.stopPropagation();go(\'quarto/' + r.id + '\')">Ver detalhes</button>' +
+    '<button class="btn small ghost" style="color:var(--dark);border-color:var(--dark)" onclick="event.stopPropagation();go(\'reservar/' + r.id + '\')">Reservar</button></div></div></div>'
+  ).join("");
+}
+let galIdx = 0, galRoom = null;
+function renderRoomDetail(id){
+  const r = roomById(id);
+  const box = document.getElementById("room-detail");
+  if(!r){ box.innerHTML = "<p>Quarto não encontrado.</p><button class='btn' onclick=\"go('quartos')\">Ver quartos</button>"; return; }
+  galRoom = r; galIdx = 0;
+  const thumbs = r.photos.map((p, i) => '<img src="' + p + '" class="' + (i === 0 ? "sel" : "") + '" onclick="setGal(' + i + ',this)">').join("");
+  box.innerHTML =
+    '<p><a href="#" onclick="go(\'quartos\');return false" style="color:var(--sea);font-weight:700">← Todos os quartos</a></p>' +
+    '<div class="detail" style="margin-top:16px"><div>' +
+    '<div class="gal-main"><img id="gal-main" src="' + r.photos[0] + '" alt="' + esc(r.name) + '"></div>' +
+    '<div class="gal-thumbs">' + thumbs + '</div>' +
+    '<p class="note">Toca numa foto para ver cada ambiente do quarto em detalhe: quarto, varanda, sala e casa de banho.</p>' +
+    '<div class="form" style="margin-top:20px"><label>Ver disponibilidade nestas datas</label>' +
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><input type="date" id="det-in"><input type="date" id="det-out"></div>' +
+    '<button class="btn small" style="margin-top:12px" onclick="checkDetailAvail(\'' + r.id + '\')">Ver disponibilidade</button>' +
+    '<div id="det-avail" style="margin-top:12px"></div></div>' +
+    '</div><div>' +
+    '<p class="eyebrow">Quarto</p><h2 style="font-size:clamp(30px,4vw,44px);margin:8px 0">' + esc(r.name) + '</h2>' +
+    '<p style="color:var(--muted)">' + esc(r.desc) + '</p>' +
+    '<div class="price" style="font-size:26px;font-weight:700;margin-top:16px">' + fmt(r.price) + ' <small style="font-size:14px;color:var(--muted)">/ noite</small></div>' +
+    '<div class="meta" style="margin-top:6px;color:var(--muted);font-size:14px">' + esc(r.beds) + ' · até ' + r.guests + ' hóspedes · ' + r.size + ' m² · ' + r.units + ' unidades no hotel</div>' +
+    '<div class="amen">' + r.amenities.map(a => "<span>" + esc(a) + "</span>").join("") + "</div>" +
+    '<p style="font-size:14px">Entrada ' + esc(SETTINGS.checkin) + ' · Saída ' + esc(SETTINGS.checkout) + ' · Estadia mínima 1 noite, sem limite máximo dentro de um ano.</p>' +
+    '<div class="sum">Entrada para reservar (metade)<b>' + fmt(r.price * SETTINGS.depositPct / 100) + ' / noite</b><br><span style="font-size:13px;color:var(--muted)">A entrada conta para o pagamento final, pago no hotel.</span></div>' +
+    '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px"><button class="btn" onclick="go(\'reservar/' + r.id + '\')">Reservar este quarto</button>' +
+    '<button class="btn ghost" style="color:var(--dark);border-color:var(--dark)" onclick="go(\'disponibilidade\')">Ver disponibilidade</button></div>' +
+    '</div></div>';
+  const di = document.getElementById("det-in"), dout = document.getElementById("det-out");
+  di.min = todayISO(); di.max = addDaysISO(todayISO(), 365); di.value = todayISO();
+  dout.min = addDaysISO(todayISO(), 1); dout.max = addDaysISO(todayISO(), 730); dout.value = addDaysISO(todayISO(), 2);
+}
+function setGal(i, el){
+  galIdx = i;
+  document.getElementById("gal-main").src = galRoom.photos[i];
+  document.querySelectorAll(".gal-thumbs img").forEach(x => x.classList.remove("sel"));
+  el.classList.add("sel");
+}
+function checkDetailAvail(roomId){
+  const din = document.getElementById("det-in").value, dout = document.getElementById("det-out").value;
+  const box = document.getElementById("det-avail");
+  if(!din || !dout || nightsBetween(din, dout) < 1){ box.innerHTML = "<p style='color:#9a4a1f'>Escolhe uma entrada e uma saída válida (a saída depois da entrada).</p>"; return; }
+  const free = freeUnits(roomId, din, dout);
+  box.innerHTML = free > 0
+    ? "<p><span class='tag ok'>" + free + " livres</span> nestas datas. <button class='btn small' style='margin-left:8px' onclick=\"go('reservar/" + roomId + "')\">Reservar</button></p>"
+    : "<p><span class='tag warn'>Esgotado</span> nestas datas. Experimenta outras datas.</p>";
+}
+function initAvailDates(){
+  const a = document.getElementById("av-in"), b = document.getElementById("av-out");
+  if(!a) return;
+  a.min = todayISO(); a.max = addDaysISO(todayISO(), 365); if(!a.value) a.value = todayISO();
+  b.min = addDaysISO(todayISO(), 1); b.max = addDaysISO(todayISO(), 730); if(!b.value) b.value = addDaysISO(todayISO(), 2);
+}
+function checkAvailability(){
+  const din = document.getElementById("av-in").value, dout = document.getElementById("av-out").value;
+  const box = document.getElementById("avail-results");
+  if(!din || !dout || nightsBetween(din, dout) < 1){ box.innerHTML = "<p style='color:#9a4a1f'>Escolhe uma entrada e uma saída válida.</p>"; return; }
+  const n = nightsBetween(din, dout);
+  let rows = ROOMS.map(r => {
+    const free = freeUnits(r.id, din, dout);
+    return "<tr><td><b>" + esc(r.name) + "</b><br><span style='color:var(--muted)'>" + esc(r.beds) + " · até " + r.guests + " hóspedes</span></td>" +
+    "<td>" + fmt(r.price) + " / noite</td><td>" + r.units + "</td><td>" + free + "</td>" +
+    "<td>" + (free > 0 ? "<span class='tag ok'>Disponível</span>" : "<span class='tag warn'>Esgotado</span>") + "</td>" +
+    "<td>" + (free > 0 ? "<button class='btn small' onclick=\"go('reservar/" + r.id + "')\">Reservar</button>" : "—") + "</td></tr>";
+  }).join("");
+  box.innerHTML = "<p style='margin-bottom:12px'><b>" + n + " noite" + (n > 1 ? "s" : "") + "</b> · " + din.split("-").reverse().join("/") + " → " + dout.split("-").reverse().join("/") + " · a disponibilidade actualiza-se com cada reserva.</p>" +
+    "<div style='overflow:auto'><table><tr><th>Quarto</th><th>Preço</th><th>Unidades</th><th>Livres</th><th>Estado</th><th></th></tr>" + rows + "</table></div>";
+}
+</script>
+
+<script>
+function bookingHTML(b){
+  const r = roomById(b.roomId);
+  return "<div class='admin-card'><b>" + esc(b.id) + "</b> · " + esc(r ? r.name : b.roomId) +
+  "<br><span style='color:var(--muted);font-size:14px'>" + b.in.split("-").reverse().join("/") + " → " + b.out.split("-").reverse().join("/") + " · " + b.nights + " noite" + (b.nights > 1 ? "s" : "") + " · " + b.guests + " hóspede" + (b.guests > 1 ? "s" : "") + "</span>" +
+  "<br>Total: <b>" + fmt(b.total) + "</b> · Entrada: <b>" + fmt(b.deposit) + "</b> · Restante no hotel: <b>" + fmt(b.rest) + "</b>" +
+  "<br><span class='tag " + (b.status === "Cancelada" ? "warn" : "ok") + "'>" + esc(b.status) + "</span> " +
+  "<span class='tag " + (b.payStatus === "Pago" ? "ok" : "warn") + "'>" + esc(b.payStatus) + "</span>" +
+  (b.refundAmount != null ? "<br>Reembolso: <b>" + fmt(b.refundAmount) + "</b> <span style='color:var(--muted);font-size:13px'>(" + esc(b.refundLabel || "") + ")</span>" : "") +
+  "<div class='row' style='margin-top:12px'>" +
+  (b.status !== "Cancelada" && b.payStatus !== "Pago" ? "<button class='btn small' onclick=\"go('pagamento/" + b.id + "')\">Pagar entrada</button>" : "") +
+  (b.status !== "Cancelada" ? "<button class='btn small ghost' style='color:var(--dark);border-color:var(--dark)' onclick=\"cancelBooking('" + b.id + "')\">Cancelar reserva</button>" : "") +
+  (b.payStatus === "Pago" ? "<button class='btn small' onclick=\"go('pagamento/" + b.id + "')\">Ver recibo</button>" : "") +
+  "</div></div>";
+}
+function refundFor(b){
+  const days = Math.ceil((new Date(b.in + "T00:00:00") - new Date(todayISO() + "T00:00:00")) / 86400000);
+  if(days >= 7) return {amount: b.deposit, label: "cancelamento com 7 ou mais dias de antecedência — devolução total"};
+  if(days >= 3) return {amount: Math.round(b.deposit / 2), label: "cancelamento entre 3 e 6 dias antes — devolução de metade"};
+  return {amount: 0, label: "cancelamento com menos de 3 dias — sem devolução"};
+}
+function cancelBooking(id){
+  const b = BOOKINGS.find(x => x.id === id); if(!b) return;
+  const rf = refundFor(b);
+  if(!confirm("Cancelar esta reserva?\nReembolso: " + fmt(rf.amount) + " (" + rf.label + ")")) return;
+  b.status = "Cancelada"; b.refundAmount = rf.amount; b.refundLabel = rf.label;
+  saveBookings(); toast("Reserva cancelada. Reembolso: " + fmt(rf.amount)); renderConta();
+}
+function renderBooking(prefRoom){
+  const box = document.getElementById("booking-area");
+  if(!me()){
+    store.set("azul_return", "reservar" + (prefRoom ? "/" + prefRoom : ""));
+    box.innerHTML = "<div class='form'><p>Para reservar, inicia sessão ou cria uma conta. O histórico das tuas reservas fica guardado na conta.</p>" +
+      "<div style='display:flex;gap:10px;margin-top:16px;flex-wrap:wrap'><button class='btn' onclick=\"go('conta')\">Iniciar sessão / Criar conta</button></div></div>";
+    return;
+  }
+  const roomsOpts = ROOMS.map(r => "<option value='" + r.id + "'" + (r.id === prefRoom ? " selected" : "") + ">" + esc(r.name) + " — " + fmt(r.price) + " / noite</option>").join("");
+  box.innerHTML = "<div class='form'>" +
+    "<label>Quarto</label><select id='bk-room' onchange='syncGuests();updateBookingSum()'>" + roomsOpts + "</select>" +
+    "<div style='display:grid;grid-template-columns:1fr 1fr;gap:14px'><div><label>Entrada</label><input type='date' id='bk-in' onchange='updateBookingSum()'></div>" +
+    "<div><label>Saída</label><input type='date' id='bk-out' onchange='updateBookingSum()'></div></div>" +
+    "<label>Hóspedes</label><select id='bk-guests' onchange='updateBookingSum()'></select>" +
+    "<label>Nome</label><input id='bk-name' value='" + esc(me().name || "") + "'>" +
+    "<label>Contacto / WhatsApp</label><input id='bk-phone' placeholder='Ex.: 84xxxxxxx'>" +
+    "<label>Notas (opcional)</label><textarea id='bk-notes' placeholder='Chegada tardia, berço, andar alto…'></textarea>" +
+    "<div class='sum' id='bk-sum'></div>" +
+    "<p class='note'>A reserva confirma-se com a entrada de metade do valor. A entrada conta para o pagamento final, pago no hotel. Reembolsos: 7+ dias antes — total; 3 a 6 dias — metade; menos de 3 dias — sem devolução.</p>" +
+    "<button class='btn' style='margin-top:16px' onclick='submitBooking()'>Confirmar reserva</button>" +
+    "<div id='bk-msg' style='margin-top:12px'></div></div>";
+  const bi = document.getElementById("bk-in"), bo = document.getElementById("bk-out");
+  bi.min = todayISO(); bi.max = addDaysISO(todayISO(), 365); bi.value = todayISO();
+  bo.min = addDaysISO(todayISO(), 1); bo.max = addDaysISO(todayISO(), 730); bo.value = addDaysISO(todayISO(), 2);
+  syncGuests(); updateBookingSum();
+}
+function syncGuests(){
+  const r = roomById(document.getElementById("bk-room").value); if(!r) return;
+  let o = ""; for(let i = 1; i <= r.guests; i++) o += "<option value='" + i + "'>" + i + "</option>";
+  document.getElementById("bk-guests").innerHTML = o;
+}
+function updateBookingSum(){
+  const r = roomById(document.getElementById("bk-room").value);
+  const din = document.getElementById("bk-in").value, dout = document.getElementById("bk-out").value;
+  const sum = document.getElementById("bk-sum"); if(!r || !sum) return;
+  const n = nightsBetween(din, dout);
+  if(!din || !dout || n < 1){ sum.innerHTML = "Escolhe uma entrada e uma saída válida (a saída depois da entrada)."; return; }
+  const total = r.price * n, dep = Math.round(total * SETTINGS.depositPct / 100), rest = total - dep;
+  const free = freeUnits(r.id, din, dout);
+  sum.innerHTML = n + " noite" + (n > 1 ? "s" : "") + " × " + fmt(r.price) + "<b>" + fmt(total) + "</b><br>" +
+    "Entrada (" + SETTINGS.depositPct + "%)<b>" + fmt(dep) + "</b><br>" +
+    "Restante no hotel<b>" + fmt(rest) + "</b><br>" +
+    "<span style='font-size:13px;color:" + (free > 0 ? "#2e6b34" : "#9a4a1f") + "'>" + (free > 0 ? free + " unidades livres nestas datas" : "Esgotado nestas datas — escolhe outras datas") + "</span>";
+}
+function submitBooking(){
+  const u = me(); if(!u) return;
+  const roomId = document.getElementById("bk-room").value, r = roomById(roomId);
+  const din = document.getElementById("bk-in").value, dout = document.getElementById("bk-out").value;
+  const guests = parseInt(document.getElementById("bk-guests").value, 10);
+  const name = document.getElementById("bk-name").value.trim();
+  const phone = document.getElementById("bk-phone").value.trim();
+  const notes = document.getElementById("bk-notes").value.trim();
+  const msg = document.getElementById("bk-msg");
+  const n = nightsBetween(din, dout);
+  if(!name){ msg.innerHTML = "<p style='color:#9a4a1f'>Escreve o teu nome.</p>"; return; }
+  if(!din || !dout || n < 1){ msg.innerHTML = "<p style='color:#9a4a1f'>Escolhe datas válidas.</p>"; return; }
+  if(din < todayISO() || din > addDaysISO(todayISO(), 365)){ msg.innerHTML = "<p style='color:#9a4a1f'>A entrada tem de ser de hoje até um ano à frente.</p>"; return; }
+  if(guests > r.guests){ msg.innerHTML = "<p style='color:#9a4a1f'>Este quarto aceita no máximo " + r.guests + " hóspedes.</p>"; return; }
+  if(freeUnits(roomId, din, dout) < 1){ msg.innerHTML = "<p style='color:#9a4a1f'>Este quarto está esgotado nestas datas.</p>"; return; }
+  const total = r.price * n, dep = Math.round(total * SETTINGS.depositPct / 100);
+  const b = {id: "AZUL-" + Date.now().toString(36).toUpperCase(), email: u.email, name: name, phone: phone, notes: notes, roomId: roomId, in: din, out: dout, guests: guests, nights: n, total: total, deposit: dep, rest: total - dep, status: "Pendente", payStatus: "Aguarda pagamento", createdAt: new Date().toISOString()};
+  BOOKINGS.push(b); saveBookings();
+  document.getElementById("booking-area").innerHTML = "<div class='form'><h3 style='font-size:28px'>Reserva registada.</h3>" +
+    "<p style='color:var(--muted);margin:10px 0'>Reserva <b style='color:var(--ink)'>" + b.id + "</b> · " + esc(r.name) + " · " + din.split("-").reverse().join("/") + " → " + dout.split("-").reverse().join("/") + " · " + n + " noite" + (n > 1 ? "s" : "") + "</p>" +
+    "<div class='sum'>Total<b>" + fmt(total) + "</b><br>Entrada a pagar<b>" + fmt(dep) + "</b><br>Restante no hotel<b>" + fmt(total - dep) + "</b></div>" +
+    "<div style='display:flex;gap:10px;margin-top:18px;flex-wrap:wrap'><button class='btn' onclick=\"go('pagamento/" + b.id + "')\">Pagar entrada</button>" +
+    "<button class='btn ghost' style='color:var(--dark);border-color:var(--dark)' onclick=\"go('conta')\">Ver as minhas reservas</button></div></div>";
+  toast("Reserva " + b.id + " registada");
+}
+function receiptHTML(b){
+  const r = roomById(b.roomId);
+  return "<div class='receipt'><h3>AZUL · Hotel</h3><p style='font-size:13px;color:var(--muted)'>Recibo de pagamento — reserva " + esc(b.id) + "</p>" +
+  "<div class='row'><span>Hóspede</span><b>" + esc(b.name) + "</b></div>" +
+  "<div class='row'><span>Quarto</span><b>" + esc(r ? r.name : b.roomId) + "</b></div>" +
+  "<div class='row'><span>Entrada</span><b>" + b.in.split("-").reverse().join("/") + "</b></div>" +
+  "<div class='row'><span>Saída</span><b>" + b.out.split("-").reverse().join("/") + "</b></div>" +
+  "<div class='row'><span>Noites</span><b>" + b.nights + "</b></div>" +
+  "<div class='row'><span>Total da estadia</span><b>" + fmt(b.total) + "</b></div>" +
+  "<div class='row'><span>Entrada paga</span><b>" + fmt(b.deposit) + "</b></div>" +
+  "<div class='row'><span>Restante no hotel</span><b>" + fmt(b.rest) + "</b></div>" +
+  "<div class='row'><span>Pagamento confirmado</span><b>" + (b.paidAt ? new Date(b.paidAt).toLocaleString("pt-PT") : "—") + "</b></div>" +
+  "<p class='note'>Apresenta este recibo na chegada. O restante paga-se no hotel.</p>" +
+  "<button class='btn small' style='margin-top:12px' onclick='window.print()'>Imprimir recibo</button></div>";
+}
+function renderPayment(id){
+  const box = document.getElementById("pay-box");
+  const b = BOOKINGS.find(x => x.id === id);
+  if(!b){ box.innerHTML = "<p>Reserva não encontrada.</p>"; return; }
+  const u = me();
+  if(!u || (u.email !== b.email && !u.isAdmin)){ box.innerHTML = "<p>Esta reserva pertence a outra conta. Inicia sessão com a conta da reserva.</p><button class='btn' onclick=\"go('conta')\">Ir para a conta</button>"; return; }
+  const r = roomById(b.roomId);
+  if(b.payStatus === "Pago"){
+    box.innerHTML = "<p class='eyebrow'>Pagamento confirmado</p><h2 style='font-size:36px;margin:10px 0'>Obrigado, " + esc(b.name.split(" ")[0]) + ".</h2><p style='color:var(--muted)'>A tua entrada está paga. Aqui está o teu recibo.</p><div style='margin-top:20px'>" + receiptHTML(b) + "</div><div style='margin-top:18px'><button class='btn' onclick=\"go('conta')\">Ver as minhas reservas</button></div>";
+    return;
+  }
+  box.innerHTML = "<p class='eyebrow'>Pagamento</p><h2 style='font-size:36px;margin:10px 0'>Pagar a entrada.</h2>" +
+  "<div class='form'><p><b>" + esc(r ? r.name : b.roomId) + "</b> · " + b.in.split("-").reverse().join("/") + " → " + b.out.split("-").reverse().join("/") + " · " + b.nights + " noite" + (b.nights > 1 ? "s" : "") + "</p>" +
+  "<div class='sum'>Total da estadia<b>" + fmt(b.total) + "</b><br>Entrada a pagar agora<b>" + fmt(b.deposit) + "</b><br>Restante no hotel<b>" + fmt(b.rest) + "</b></div>" +
+  "<p style='margin-top:16px'><b>Formas de pagamento</b></p>" +
+  "<p style='color:var(--muted)'>" + esc(SETTINGS.paymentNote || "As formas de pagamento serão anunciadas aqui pela gerência.") + "</p>" +
+  "<p class='note'>Depois de pagares, o hotel confirma o pagamento e o recibo aparece aqui automaticamente. Sem confirmação, a reserva fica a aguardar pagamento.</p>" +
+  "<div style='display:flex;gap:10px;margin-top:16px;flex-wrap:wrap'><button class='btn' onclick='openChatFab()'>Avisar o hotel no chat</button>" +
+  "<button class='btn ghost' style='color:var(--dark);border-color:var(--dark)' onclick=\"go('conta')\">Ver as minhas reservas</button></div></div>";
+}
+function renderConta(){
+  const box = document.getElementById("conta-box");
+  const notice = store.get("azul_notice", "");
+  if(notice){ store.set("azul_notice", ""); }
+  const u = me();
+  if(!u){
+    box.innerHTML = (notice ? "<p style='background:#fdf0e9;padding:14px;border-radius:10px;margin-bottom:16px'>" + esc(notice) + "</p>" : "") +
+    "<div class='form'><h2 style='font-size:32px'>Entrar</h2>" +
+    "<label>Email</label><input id='li-email' type='email'>" +
+    "<label>Senha</label><input id='li-pass' type='password'>" +
+    "<button class='btn' style='margin-top:16px' onclick='login()'>Entrar</button></div>" +
+    "<div class='form' style='margin-top:18px'><h2 style='font-size:32px'>Criar conta</h2>" +
+    "<label>Nome</label><input id='su-name'>" +
+    "<label>Email</label><input id='su-email' type='email'>" +
+    "<label>Senha</label><input id='su-pass' type='password'>" +
+    "<button class='btn' style='margin-top:16px' onclick='signup()'>Criar conta</button>" +
+    "<p class='note'>A primeira conta criada é a conta de administração do hotel.</p></div>";
+    return;
+  }
+  const mine = BOOKINGS.filter(b => b.email === u.email).sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+  box.innerHTML = "<h2 style='font-size:34px'>Olá, " + esc(u.name) + ".</h2><p style='color:var(--muted)'>" + esc(u.email) + (u.isAdmin ? " · Administração" : "") + "</p>" +
+  "<div style='display:flex;gap:10px;margin:18px 0;flex-wrap:wrap'>" +
+  (u.isAdmin ? "<button class='btn' onclick=\"go('admin')\">Painel de administração</button>" : "") +
+  "<button class='btn ghost' style='color:var(--dark);border-color:var(--dark)' onclick='openChatFab()'>Abrir o chat</button>" +
+  "<button class='btn ghost' style='color:var(--dark);border-color:var(--dark)' onclick='logout()'>Sair</button></div>" +
+  "<h3 style='font-size:26px;margin:22px 0 12px'>As minhas reservas</h3>" +
+  (mine.length ? mine.map(bookingHTML).join("") : "<p style='color:var(--muted)'>Ainda não tens reservas. <a href='#' onclick=\"go('disponibilidade');return false\" style='color:var(--sea);font-weight:700'>Ver disponibilidade →</a></p>");
+}
+async function login(){
+  const email = document.getElementById("li-email").value.trim().toLowerCase();
+  const pass = document.getElementById("li-pass").value;
+  const acc = ACCOUNTS.find(a => a.email === email);
+  if(!acc || acc.pass !== await sha256(pass)){ toast("Email ou senha errada."); return; }
+  store.set("azul_session", acc.email);
+  const ret = store.get("azul_return", ""); store.set("azul_return", "");
+  toast("Sessão iniciada. Bem-vindo, " + acc.name + ".");
+  if(ret === "chat"){ openChatFab(); } else if(ret){ go(ret); } else { renderConta(); }
+}
+async function signup(){
+  const name = document.getElementById("su-name").value.trim();
+  const email = document.getElementById("su-email").value.trim().toLowerCase();
+  const pass = document.getElementById("su-pass").value;
+  if(!name || !email || pass.length < 4){ toast("Preenche nome, email e uma senha com 4 ou mais caracteres."); return; }
+  if(ACCOUNTS.find(a => a.email === email)){ toast("Já existe uma conta com esse email. Entra."); return; }
+  const acc = {name: name, email: email, pass: await sha256(pass), isAdmin: ACCOUNTS.length === 0};
+  ACCOUNTS.push(acc); saveAccounts(); store.set("azul_session", acc.email);
+  const ret = store.get("azul_return", ""); store.set("azul_return", "");
+  toast("Conta criada. Bem-vindo, " + name + ".");
+  if(ret === "chat"){ openChatFab(); } else if(ret){ go(ret); } else { renderConta(); }
+}
+function logout(){ store.set("azul_session", null); toast("Sessão terminada."); renderConta(); }
+function openWhatsApp(){
+  const msg = "Olá AZUL, quero falar sobre o hotel.";
+  window.open("https://wa.me/" + SETTINGS.whatsapp + "?text=" + encodeURIComponent(msg), "_blank");
+}
+</script>
+
+<script>
+let adminTab = "quartos", adminChatUser = "";
+function renderAdmin(tab){
+  adminTab = tab || adminTab;
+  const box = document.getElementById("admin-box");
+  const u = me();
+  if(!u || !u.isAdmin){ box.innerHTML = "<h2 style='font-size:32px'>Administração</h2><p style='color:var(--muted);margin-top:10px'>Só a conta de administração entra aqui. A primeira conta criada no site é a de administração.</p><button class='btn' style='margin-top:16px' onclick=\"go('conta')\">Ir para a conta</button>"; return; }
+  const tabs = [["quartos","Quartos"],["reservas","Reservas"],["clientes","Clientes"],["conversas","Conversas"],["pagina","Página"],["definicoes","Definições"]];
+  let html = "<h2 style='font-size:34px'>Painel de administração</h2><p style='color:var(--muted)'>Tudo o que se muda aqui muda no site.</p><div class='tabs' style='margin-top:18px'>";
+  html += tabs.map(t => "<button class='" + (adminTab === t[0] ? "on" : "") + "' onclick=\"renderAdmin('" + t[0] + "')\">" + t[1] + "</button>").join("");
+  html += "</div><div id='admin-content'>";
+  if(adminTab === "quartos") html += adminRoomsHTML();
+  else if(adminTab === "reservas") html += adminBookingsHTML();
+  else if(adminTab === "clientes") html += adminClientsHTML();
+  else if(adminTab === "conversas") html += adminChatsHTML();
+  else if(adminTab === "pagina") html += adminPageHTML();
+  else html += adminSettingsHTML();
+  html += "</div>";
+  box.innerHTML = html;
+}
+function adminRoomsHTML(){
+  let h = "<button class='btn small' onclick='addRoom()'>+ Novo tipo de quarto</button><div style='margin-top:16px'>";
+  h += ROOMS.map(r => "<div class='admin-card'><div class='row'>" +
+    "<input id='ar-name-" + r.id + "' value='" + esc(r.name) + "' placeholder='Nome'>" +
+    "<input id='ar-price-" + r.id + "' type='number' value='" + r.price + "' placeholder='Preço/noite'>" +
+    "<input id='ar-units-" + r.id + "' type='number' value='" + r.units + "' placeholder='Unidades'>" +
+    "<input id='ar-guests-" + r.id + "' type='number' value='" + r.guests + "' placeholder='Hóspedes'>" +
+    "<input id='ar-size-" + r.id + "' type='number' value='" + r.size + "' placeholder='m²'>" +
+    "<input id='ar-beds-" + r.id + "' value='" + esc(r.beds) + "' placeholder='Camas'>" +
+    "</div>" +
+    "<textarea id='ar-desc-" + r.id + "' style='width:100%;margin-top:10px;padding:10px;border:1px solid var(--line);border-radius:8px;font:inherit' placeholder='Descrição'>" + esc(r.desc) + "</textarea>" +
+    "<input id='ar-amen-" + r.id + "' value='" + esc(r.amenities.join(", ")) + "' placeholder='O que tem, separado por vírgulas' style='width:100%;margin-top:10px;padding:10px;border:1px solid var(--line);border-radius:8px;font:inherit'>" +
+    "<div class='row' style='margin-top:10px'>" + r.photos.map((p, i) => "<span style='position:relative'><img class='thumb' src='" + p + "'><button onclick=\"removeRoomPhoto('" + r.id + "'," + i + ")\" style='position:absolute;top:-8px;right:-8px;border:0;background:var(--dark);color:#fff;border-radius:50%;width:20px;height:20px;cursor:pointer'>×</button></span>").join("") + "</div>" +
+    "<div class='row' style='margin-top:10px'><label class='btn small' style='cursor:pointer'>+ Anexar foto por ficheiro<input type='file' accept='image/*' hidden onchange=\"addRoomPhoto('" + r.id + "',this)\"></label>" +
+    "<button class='btn small' onclick=\"saveRoom('" + r.id + "')\">Guardar</button>" +
+    "<button class='btn small ghost' style='color:#9a4a1f;border-color:#9a4a1f' onclick=\"delRoom('" + r.id + "')\">Apagar</button></div></div>").join("");
+  return h + "</div>";
+}
+function saveRoom(id){
+  const r = roomById(id); if(!r) return;
+  r.name = document.getElementById("ar-name-" + id).value.trim() || r.name;
+  r.price = parseInt(document.getElementById("ar-price-" + id).value, 10) || r.price;
+  r.units = parseInt(document.getElementById("ar-units-" + id).value, 10) || r.units;
+  r.guests = parseInt(document.getElementById("ar-guests-" + id).value, 10) || r.guests;
+  r.size = parseInt(document.getElementById("ar-size-" + id).value, 10) || r.size;
+  r.beds = document.getElementById("ar-beds-" + id).value.trim() || r.beds;
+  r.desc = document.getElementById("ar-desc-" + id).value.trim();
+  r.amenities = document.getElementById("ar-amen-" + id).value.split(",").map(s => s.trim()).filter(Boolean);
+  saveRooms(); toast("Quarto guardado."); renderAdmin("quartos");
+}
+function addRoom(){
+  const id = "quarto-" + Date.now().toString(36);
+  ROOMS.push({id: id, name: "Novo quarto", price: 10000, units: 10, guests: 2, size: 30, beds: "Cama de casal", desc: "", amenities: ["Wi-Fi","Ar condicionado"], photos: []});
+  saveRooms(); renderAdmin("quartos"); toast("Novo quarto criado. Edita e guarda.");
+}
+function delRoom(id){
+  if(BOOKINGS.some(b => b.roomId === id && b.status !== "Cancelada")){ toast("Este quarto tem reservas activas. Cancela-as primeiro."); return; }
+  if(!confirm("Apagar este tipo de quarto?")) return;
+  ROOMS = ROOMS.filter(r => r.id !== id); saveRooms(); renderAdmin("quartos");
+}
+function addRoomPhoto(id, input){
+  const f = input.files[0]; if(!f) return;
+  if(f.size > 4 * 1024 * 1024){ toast("Foto demasiado grande (máx. 4 MB)."); return; }
+  const rd = new FileReader();
+  rd.onload = () => { const r = roomById(id); r.photos.push(rd.result); saveRooms(); renderAdmin("quartos"); toast("Foto anexada."); };
+  rd.readAsDataURL(f);
+}
+function removeRoomPhoto(id, idx){ const r = roomById(id); r.photos.splice(idx, 1); saveRooms(); renderAdmin("quartos"); }
+function adminBookingsHTML(){
+  if(!BOOKINGS.length) return "<p style='color:var(--muted)'>Ainda não há reservas.</p>";
+  const list = BOOKINGS.slice().sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+  return list.map(b => {
+    const r = roomById(b.roomId);
+    return "<div class='admin-card'><b>" + esc(b.id) + "</b> · " + esc(b.name) + " (" + esc(b.email) + ")" +
+    "<br><span style='color:var(--muted);font-size:14px'>" + esc(r ? r.name : b.roomId) + " · " + b.in.split("-").reverse().join("/") + " → " + b.out.split("-").reverse().join("/") + " · " + b.nights + " noites · " + b.guests + " hóspedes</span>" +
+    "<br>Total <b>" + fmt(b.total) + "</b> · Entrada <b>" + fmt(b.deposit) + "</b> · Estado <b>" + esc(b.status) + "</b> · Pagamento <b>" + esc(b.payStatus) + "</b>" +
+    "<div class='row' style='margin-top:10px'>" +
+    "<select onchange=\"setBookingStatus('" + b.id + "',this.value)\"><option" + (b.status === "Pendente" ? " selected" : "") + ">Pendente</option><option" + (b.status === "Confirmada" ? " selected" : "") + ">Confirmada</option><option" + (b.status === "Cancelada" ? " selected" : "") + ">Cancelada</option></select>" +
+    "<button class='btn small' onclick=\"togglePay('" + b.id + "')\">" + (b.payStatus === "Pago" ? "Marcar por pagar" : "Marcar pago → recibo") + "</button>" +
+    (b.payStatus === "Pago" ? "<button class='btn small ghost' style='color:var(--dark);border-color:var(--dark)' onclick=\"go('pagamento/" + b.id + "')\">Ver recibo</button>" : "") +
+    "</div></div>";
+  }).join("");
+}
+function setBookingStatus(id, val){
+  const b = BOOKINGS.find(x => x.id === id); if(!b) return;
+  b.status = val; saveBookings(); toast("Reserva " + id + ": " + val); renderAdmin("reservas");
+}
+function togglePay(id){
+  const b = BOOKINGS.find(x => x.id === id); if(!b) return;
+  if(b.payStatus === "Pago"){ b.payStatus = "Aguarda pagamento"; b.paidAt = null; }
+  else { b.payStatus = "Pago"; b.paidAt = new Date().toISOString(); if(b.status === "Pendente") b.status = "Confirmada"; }
+  saveBookings(); toast("Pagamento de " + id + ": " + b.payStatus); renderAdmin("reservas");
+}
+function adminClientsHTML(){
+  if(!ACCOUNTS.length) return "<p style='color:var(--muted)'>Ainda não há contas.</p>";
+  return ACCOUNTS.map(a => {
+    const bs = BOOKINGS.filter(b => b.email === a.email);
+    const paid = bs.filter(b => b.payStatus === "Pago").reduce((s, b) => s + b.deposit, 0);
+    return "<div class='admin-card'><b>" + esc(a.name) + "</b> · " + esc(a.email) + (a.isAdmin ? " · Administração" : "") +
+    "<br><span style='color:var(--muted);font-size:14px'>" + bs.length + " reserva" + (bs.length !== 1 ? "s" : "") + " · entradas pagas: " + fmt(paid) + "</span>" +
+    "<div style='margin-top:8px'>" + bs.map(b => esc(b.id) + " (" + esc(b.status) + ")").join(" · ") + "</div></div>";
+  }).join("");
+}
+function adminChatsHTML(){
+  const users = Object.keys(CHATS).filter(e => CHATS[e] && CHATS[e].length);
+  if(!users.length) return "<p style='color:var(--muted)'>Ainda não há conversas.</p>";
+  let h = "<div style='display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px'>" + users.map(e => "<button class='btn small " + (adminChatUser === e ? "" : "ghost") + "' style='" + (adminChatUser === e ? "" : "color:var(--dark);border-color:var(--dark)") + "' onclick=\"adminChatUser='" + e + "';renderAdmin('conversas')\">" + esc(e) + "</button>").join("") + "</div>";
+  if(adminChatUser && CHATS[adminChatUser]){
+    CHATS[adminChatUser].forEach(m => { if(m.from === "me") m.seen = true; }); saveChats();
+    h += "<div style='background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px'>";
+    h += CHATS[adminChatUser].map(m => "<p style='margin:6px 0'><b>" + (m.from === "me" ? "Cliente" : "Hotel") + ":</b> " + esc(m.text || (m.file ? m.file.name : "")) + " <span style='color:var(--muted);font-size:12px'>" + (m.time || "") + "</span></p>").join("");
+    h += "<div style='display:flex;gap:8px;margin-top:12px'><input id='admin-reply' style='flex:1;padding:12px;border:1px solid var(--line);border-radius:10px;font:inherit' placeholder='Responder…'><button class='btn small' onclick='sendAdminChat()'>Enviar</button></div></div>";
+  }
+  return h;
+}
+function sendAdminChat(){
+  const t = document.getElementById("admin-reply"); if(!t || !t.value.trim() || !adminChatUser) return;
+  CHATS[adminChatUser].push({from: "hotel", text: t.value.trim(), time: new Date().toLocaleTimeString("pt-PT", {hour: "2-digit", minute: "2-digit"})});
+  saveChats(); renderAdmin("conversas"); toast("Resposta enviada.");
+}
+function adminPageHTML(){
+  return "<div class='form'><label>Frase da página inicial</label><textarea id='pg-intro'>" + esc(SETTINGS.introText || "Entre o jardim e o mar, com luz, silêncio e tempo. Quartos calmos, piscina infinita, restaurante e pátios para estar, sem pressa.") + "</textarea>" +
+  "<label>Texto da secção O hotel</label><textarea id='pg-hotel'>" + esc(SETTINGS.hotelText || "Arcos, pátios e uma piscina que parece continuar no horizonte. O edifício foi pensado para se viver devagar: luz natural, materiais simples e silêncio.") + "</textarea>" +
+  "<button class='btn' style='margin-top:16px' onclick='savePageTexts()'>Guardar textos</button></div>";
+}
+function savePageTexts(){
+  SETTINGS.introText = document.getElementById("pg-intro").value.trim();
+  SETTINGS.hotelText = document.getElementById("pg-hotel").value.trim();
+  saveSettings(); applyPageTexts(); toast("Textos guardados.");
+}
+function adminSettingsHTML(){
+  return "<div class='form'><label>WhatsApp do hotel (só números, com indicativo)</label><input id='st-wa' value='" + esc(SETTINGS.whatsapp) + "'>" +
+  "<label>Entrada</label><input id='st-in' value='" + esc(SETTINGS.checkin) + "'>" +
+  "<label>Saída</label><input id='st-out' value='" + esc(SETTINGS.checkout) + "'>" +
+  "<label>Entrada para reservar (%)</label><input id='st-dep' type='number' value='" + SETTINGS.depositPct + "'>" +
+  "<label>Formas de pagamento (texto mostrado na página de pagamento)</label><textarea id='st-pay' placeholder='Ex.: Paga a entrada por M-Pesa para o número…'>" + esc(SETTINGS.paymentNote || "") + "</textarea>" +
+  "<button class='btn' style='margin-top:16px' onclick='saveSettingsForm()'>Guardar definições</button>" +
+  "<p class='note'>Quando colocares as formas de pagamento aqui, elas aparecem logo na página de pagamento de cada reserva.</p></div>";
+}
+function saveSettingsForm(){
+  SETTINGS.whatsapp = document.getElementById("st-wa").value.replace(/\D/g, "") || SETTINGS.whatsapp;
+  SETTINGS.checkin = document.getElementById("st-in").value.trim() || SETTINGS.checkin;
+  SETTINGS.checkout = document.getElementById("st-out").value.trim() || SETTINGS.checkout;
+  const d = parseInt(document.getElementById("st-dep").value, 10);
+  if(d >= 0 && d <= 100) SETTINGS.depositPct = d;
+  SETTINGS.paymentNote = document.getElementById("st-pay").value.trim();
+  saveSettings(); toast("Definições guardadas.");
+}
+function applyPageTexts(){
+  const it = document.getElementById("intro-text"), ht = document.getElementById("hotel-text");
+  if(it && SETTINGS.introText) it.textContent = SETTINGS.introText;
+  if(ht && SETTINGS.hotelText) ht.textContent = SETTINGS.hotelText;
+}
+function openChatFab(){
+  const u = me();
+  if(!u){
+    store.set("azul_notice", "Inicia sessão para conversar — o histórico fica guardado na tua conta.");
+    store.set("azul_return", "chat");
+    go("conta"); return;
+  }
+  document.getElementById("chat-screen").classList.add("open");
+  renderChat();
+}
+function closeChat(){ document.getElementById("chat-screen").classList.remove("open"); }
+function renderChat(){
+  const u = me(); if(!u) return;
+  const list = CHATS[u.email] || [];
+  list.forEach(m => { if(m.from === "hotel") m.seen = true; }); saveChats();
+  const box = document.getElementById("chat-msgs");
+  if(!list.length){ box.innerHTML = "<p style='color:var(--muted);text-align:center;margin-top:40px'>Olá, " + esc(u.name) + ". Escreve a primeira mensagem — o hotel responde aqui.</p>"; return; }
+  box.innerHTML = list.map(m => {
+    let body = m.text ? esc(m.text) : "";
+    if(m.file){
+      if(m.file.type && m.file.type.indexOf("image") === 0) body += "<br><img src='" + m.file.data + "' style='max-width:220px;border-radius:10px;margin-top:6px'>";
+      else if(m.file.type && m.file.type.indexOf("audio") === 0) body += "<br><audio controls src='" + m.file.data + "' style='max-width:220px'></audio>";
+      else body += "<br>📎 " + esc(m.file.name);
+    }
+    const ticks = m.from === "me" ? (m.seen ? " ✓✓" : " ✓") : "";
+    return "<div class='msg " + (m.from === "me" ? "me" : "hotel") + "'>" + body + "<small>" + (m.time || "") + ticks + "</small></div>";
+  }).join("");
+  box.scrollTop = box.scrollHeight;
+}
+function pushChat(msg){
+  const u = me(); if(!u) return;
+  if(!CHATS[u.email]) CHATS[u.email] = [];
+  CHATS[u.email].push(msg); saveChats(); renderChat();
+}
+function sendChat(){
+  const inp = document.getElementById("chat-text");
+  const t = inp.value.trim(); if(!t) return;
+  pushChat({from: "me", text: t, time: new Date().toLocaleTimeString("pt-PT", {hour: "2-digit", minute: "2-digit"}), seen: false});
+  inp.value = "";
+}
+function sendChatFile(input){
+  const f = input.files[0]; if(!f) return;
+  if(f.size > 4 * 1024 * 1024){ toast("Ficheiro demasiado grande (máx. 4 MB)."); return; }
+  const rd = new FileReader();
+  rd.onload = () => pushChat({from: "me", text: "", file: {name: f.name, type: f.type, data: rd.result}, time: new Date().toLocaleTimeString("pt-PT", {hour: "2-digit", minute: "2-digit"}), seen: false});
+  rd.readAsDataURL(f);
+}
+let recorder = null, recChunks = [];
+function toggleRec(){
+  const btn = document.getElementById("mic-btn");
+  if(recorder && recorder.state === "recording"){
+    recorder.stop(); btn.textContent = "🎙️"; return;
+  }
+  if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){ toast("O teu aparelho não permite gravar áudio aqui."); return; }
+  navigator.mediaDevices.getUserMedia({audio: true}).then(stream => {
+    recChunks = [];
+    recorder = new MediaRecorder(stream);
+    recorder.ondataavailable = e => { if(e.data.size) recChunks.push(e.data); };
+    recorder.onstop = () => {
+      const blob = new Blob(recChunks, {type: "audio/webm"});
+      const rd = new FileReader();
+      rd.onload = () => pushChat({from: "me", text: "", file: {name: "Áudio", type: "audio/webm", data: rd.result}, time: new Date().toLocaleTimeString("pt-PT", {hour: "2-digit", minute: "2-digit"}), seen: false});
+      rd.readAsDataURL(blob);
+      stream.getTracks().forEach(t => t.stop());
+    };
+    recorder.start(); btn.textContent = "⏹️"; toast("A gravar… toca outra vez para parar.");
+  }).catch(() => toast("Não foi possível usar o microfone."));
+}
+applyPageTexts();
+render();
+const hv = document.getElementById("hero-video"); if(hv) hv.play().catch(() => {});
 </script>
 </body>
 </html>
